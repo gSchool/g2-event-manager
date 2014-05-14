@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+- 2.1.1
+before_script:
+- cp config/database.yml.travis config/database.yml
+- bundle exec rake db:create
+- bundle exec rake db:migrate
+script:
+- bundle exec rake spec
+deploy:
+  provider: heroku
+  api_key:
+    secure: Lni6iUleQqWH+6KlhnVg0/bX3eKcn6nPYSNiC4IKJA5e8pLEkxOvXTOcybvE+Dpt4EhqthOpB4F+tjDw80crB/ci8KPoCbdpngme355wuPCYGlNAbywyM/G02oa6xnEVPSV345fYwCJFX2UtJaNviWxTBmB6lv19gqhNhgU4s/8=
+  app: g2-event-manager-staging
+  on:
+    repo: gSchool/g2-event-manager
