@@ -10,7 +10,9 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: Lni6iUleQqWH+6KlhnVg0/bX3eKcn6nPYSNiC4IKJA5e8pLEkxOvXTOcybvE+Dpt4EhqthOpB4F+tjDw80crB/ci8KPoCbdpngme355wuPCYGlNAbywyM/G02oa6xnEVPSV345fYwCJFX2UtJaNviWxTBmB6lv19gqhNhgU4s/8=
+    secure: X1N78Leq1JcYIb/kntxqdgk1RZV2HEXs3QJS+V0E136F6njEIbcZ7XXHWN+8/0UebM+3CNWK8Pkx3iAD+9Mv8gcXBOWjZ42A5SlZ3wcYTESsLeLGj1LHNe0XNfXYHDHBIYKVy7bWRkZEr7AX2Ip+Tp8L+1n/lRvLdAveiiqwkWg=
   app: g2-event-manager-staging
   on:
     repo: gSchool/g2-event-manager
+  run:
+    - "bundle exec rake db:migrate"
