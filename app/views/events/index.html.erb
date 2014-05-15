@@ -1,0 +1,13 @@
+<%= link_to 'Add Event', new_event_path %>
+
+<ul>
+
+
+<% @events.each do |event| %>
+    <li><%= event.name %>
+  <%= event.description %>
+  <%= event.date %>
+  <%= event.location %></li>
+<% end %>
+
+</ul>
