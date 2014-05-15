@@ -2,12 +2,19 @@
 <html>
 <head>
   <title>G2EventManager</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<header>
+  <div class="navigation">
+    <h1>EventLite</h1>
+    <div class="authentication">
+      <%= @current_user ? @current_user.email : (link_to 'Register', new_user_path, class: "register") %>
+    </div>
+  </div>
+</header>
 <%= yield %>
 
 </body>
