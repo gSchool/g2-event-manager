@@ -1,0 +1,5 @@
+# The test database configuration for TravisCI
+test:
+  adapter: postgresql
+  database: travis_ci_test
+  username: postgres
