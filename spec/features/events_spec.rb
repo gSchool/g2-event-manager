@@ -4,6 +4,10 @@ feature 'events managment' do
 
   before do
     visit '/'
+    click_on 'Register'
+    fill_in 'Email', with: 's@s.com'
+    fill_in 'Password', with: 'password'
+    click_on 'Submit'
     click_on 'See All Events'
     click_on 'Add Event'
     fill_in 'Name', with: 'Ignite Boulder'
@@ -15,13 +19,14 @@ feature 'events managment' do
     click_on 'Create Event'
   end
 
-  scenario 'user can add an event' do
+  scenario 'only a user can add an event' do
+
     expect(page).to have_content 'Ignite Boulder'
     expect(page).to have_content '2014-05-15'
     expect(page).to have_content 'Boulder Theatre'
   end
 
-  scenario 'guest can click on event to see details' do
+  scenario 'user can click on event to see details' do
     click_on 'Ignite Boulder'
     expect(page).to have_content 'Ignite Boulder'
     expect(page).to have_content '2014-05-15'
@@ -31,7 +36,12 @@ feature 'events managment' do
     expect(page).to have_content '500'
   end
 
-
-
+  scenario 'Guests cannot create an event' do
+    visit '/'
+    click_on 'Logout'
+    click_on 'See All Events'
+    click_on 'Add Event'
+    expect(page).to have_content('You must login to create an event')
+  end
 
 end
