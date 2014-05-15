@@ -11,6 +11,11 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    @user = User.find(session[:current_user_id])
+    @events = @user.events
+  end
+
   private
 
   def allowed_parameters

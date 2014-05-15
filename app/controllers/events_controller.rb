@@ -15,8 +15,9 @@ class EventsController < ApplicationController
   end
 
   def create
-    Event.create(event_params)
-    redirect_to '/events'
+    @user = User.find(session[:current_user_id])
+    Event.create(event_params.merge(:user => @user))
+    redirect_to @user
   end
 
   def show

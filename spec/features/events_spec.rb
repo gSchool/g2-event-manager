@@ -37,7 +37,6 @@ feature 'events managment' do
   end
 
   scenario 'Guests cannot create an event' do
-    visit '/'
     click_on 'Logout'
     click_on 'See All Events'
     click_on 'Add Event'
