@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(allowed_parameters)
     @user.save
     session[:current_user_id] = @user.id
-    current_user
+    #current_user
     redirect_to root_path
   end
 

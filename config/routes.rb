@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :events
+  resources :login
 
 
   # Example of regular route:
