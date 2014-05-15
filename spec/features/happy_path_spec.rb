@@ -23,5 +23,7 @@ feature 'Happy Path' do
     click_on 'Update Event'
     expect(page).to have_content 'Fox Theatre'
     expect(page).to_not have_content 'Boulder Theatre'
+    click_on 'Delete this Event'
+    expect(page).to_not have_content 'Ignite Boulder'
   end
 end
