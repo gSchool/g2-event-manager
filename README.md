@@ -1,6 +1,6 @@
 g2-event-manager
 ================
-
+https://travis-ci.org/gSchool/g2-event-manager.svg?branch=master
 
 #Background
 
