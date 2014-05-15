@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'events managment' do
 
-  scenario 'user can add an event' do
+  before do
     visit '/'
     click_on 'See All Events'
     click_on 'Add Event'
@@ -11,14 +11,27 @@ feature 'events managment' do
     fill_in 'Description', with: 'Awesomeness'
     fill_in 'Location', with: 'Boulder Theatre'
     fill_in 'Capacity', with: 500
-    fill_in 'Category', with: 'Boulder Startup Weekup'
-
+    fill_in 'Category', with: 'Boulder Startup Week'
     click_on 'Create Event'
+  end
 
+  scenario 'user can add an event' do
     expect(page).to have_content 'Ignite Boulder'
     expect(page).to have_content '2014-05-15'
-    expect(page).to have_content 'Awesomeness'
     expect(page).to have_content 'Boulder Theatre'
-
   end
+
+  scenario 'guest can click on event to see details' do
+    click_on 'Ignite Boulder'
+    expect(page).to have_content 'Ignite Boulder'
+    expect(page).to have_content '2014-05-15'
+    expect(page).to have_content 'Boulder Theatre'
+    expect(page).to have_content 'Awesomeness'
+    expect(page).to have_content 'Boulder Startup Week'
+    expect(page).to have_content '500'
+  end
+
+
+
+
 end

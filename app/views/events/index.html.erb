@@ -4,7 +4,7 @@
 
 
 <% @events.each do |event| %>
-    <li><%= event.name %>
+    <li><a href="events/<%= event.id %>"><%= event.name %></a>
   <%= event.description %>
   <%= event.date %>
   <%= event.location %></li>
