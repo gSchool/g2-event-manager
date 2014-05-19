@@ -1,5 +1,12 @@
 <div class="authentication_form">
   <h2>Please Register:</h2>
+
+  <ul class="flashes">
+    <% @user.errors.full_messages.each do |error| %>
+      <li class="error"><%= error %></li>
+    <% end %>
+  </ul>
+
   <%= form_for @user do |f| %>
     <%= f.label :email %>
     <%= f.email_field :email %>

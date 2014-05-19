@@ -5,11 +5,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(allowed_parameters)
-    @user.save
-    session[:current_user_id] = @user.id
-    flash[:notice] = nil
-    #current_user
-    redirect_to root_path
+    if @user.save
+      session[:current_user_id] = @user.id
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def show
