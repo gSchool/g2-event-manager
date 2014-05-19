@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
   def index
-    @events = Kaminari.order("name").stuff(params[:page]).per(5)
+    @events = Event.all.stuff(params[:page])
   end
 
   def new

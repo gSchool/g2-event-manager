@@ -5,6 +5,7 @@
 
 <ol>
 
+  <%= paginate @events %>
 <% @events.each do |event| %>
     <li><a href="events/<%= event.id %>"><%= event.name %></a>
   <%= event.description %>
