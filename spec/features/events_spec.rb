@@ -23,10 +23,19 @@ feature 'events managment' do
   end
 
   scenario 'only a user can add an event' do
-
     expect(page).to have_content 'Ignite Boulder'
     expect(page).to have_content '2014-05-15'
     expect(page).to have_content 'Boulder Theatre'
+  end
+
+  scenario 'user can see all events they created on their homepage' do
+    click_on 's@s.com'
+    within('#my_events') do
+      expect(page).to have_content 'My events'
+      expect(page).to have_content 'Ignite Boulder'
+      expect(page).to have_content '2014-05-15'
+      expect(page).to have_content 'Boulder Theatre'
+    end
   end
 
   scenario 'user can click on event to see details' do
