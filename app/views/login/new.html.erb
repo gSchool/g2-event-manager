@@ -1,0 +1,22 @@
+<div class="authentication_form">
+  <h2>Please Login</h2>
+  <% if flash[:error] %>
+    <ul class="flashes">
+      <% flash.each do |msg| %>
+        <li class="<%= msg[0] %>"><%= msg[1] %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_for @user, {url: '/login', :method => 'post'} do |f| %>
+    <p>
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </p>
+    <p>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </p>
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>

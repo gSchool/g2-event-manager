@@ -1,0 +1,36 @@
+.authentication_form {
+  min-width: 300px;
+  max-width: 500px;
+  padding: 1em;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: #D4BE99;
+  border: 2px solid #803D44;
+
+  h2 {
+    margin-top: 0;
+  }
+  label {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: .3em;
+  }
+  input {
+    padding: .4em;
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+    border-color: #FFF0CF;
+
+  }
+  input[type="submit"] {
+    padding: .3em .6em;
+    width: 8em;
+    margin-top: 1.2em;
+    background-color: #803D44;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+  }
+}

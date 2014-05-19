@@ -1,6 +1,5 @@
 header {
   background-color: #FFF0CF;
-
   h1 {
     font-style: bold;
     float: left;
@@ -12,7 +11,7 @@ header {
     float: right;
     padding: .6em 0;
   }
-  a.register, a.logout {
+  a.register, a.logout, a.login {
     text-decoration: none;
     padding: .3em .6em;
     background-color: #49AEC0;
@@ -20,5 +19,7 @@ header {
     font-weight: bold;
     border-radius: 5px;
   }
-
+  a.login {
+    background-color: #803D44;
+  }
 }
