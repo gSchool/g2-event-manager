@@ -61,6 +61,34 @@ feature 'events managment' do
     expect(page).to have_link '2'
   end
 
+  scenario 'a user can register for an event' do
+    click_on 'Logout'
+    click_on 'Register'
+    fill_in 'Email', with: 'test@s.com'
+    fill_in 'Password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
+    click_on 'Submit'
+    click_on 'See All Events'
+    click_on 'Ignite Boulder'
+    click_on 'RSVP for this Event'
+    expect(page).to have_content('Successfully registered')
+    expect(page).to have_content('Capacity: 499')
+    end
+
+  scenario 'a user cannot register for an event if there are no tickets left' do
+    click_on 'Logout'
+    click_on 'Register'
+    fill_in 'Email', with: 'test1@s.com'
+    fill_in 'Password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
+    click_on 'Submit'
+    click_on 'See All Events'
+    event = Event.find_by_name('Ignite Boulder')
+    event.update(capacity: 0)
+    click_on 'Ignite Boulder'
+    expect(page).to_not have_link('RSVP for this Event')
+  end
+
   scenario 'only a user can view open spaces for an event' do
     visit '/events'
     click_on 'Ignite Boulder'

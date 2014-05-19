@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users
   resources :events
   resources :login
+  post '/events/:id/register', to: 'events#register', as: :register_event
 
 
   # Example of regular route:

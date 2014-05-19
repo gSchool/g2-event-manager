@@ -16,7 +16,8 @@ class EventsController < ApplicationController
 
   def create
     @user = User.find(session[:current_user_id]) if session[:current_user_id]
-    Event.create(event_params.merge(:user => @user))
+    event = Event.create(event_params.merge(:user => @user))
+    event.attendances << Attendance.new(user: @user, role: :creator)
     redirect_to @user
   end
 
@@ -44,6 +45,19 @@ class EventsController < ApplicationController
   def destroy
     Event.find(params[:id]).destroy
     redirect_to '/events'
+  end
+
+  def register
+    user = User.find(session[:current_user_id]) if session[:current_user_id]
+    event = Event.find(params[:id])
+    if event.capacity > 0
+      event.attendances << Attendance.new(user: user, role: :guest)
+      event.update(capacity: event.capacity-1)
+      flash[:notice] = "Successfully registered"
+    else
+      flash[:notice] = "This event is full"
+    end
+    redirect_to event
   end
 
   private
