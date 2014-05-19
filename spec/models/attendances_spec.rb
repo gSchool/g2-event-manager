@@ -5,7 +5,7 @@ describe Attendance do
     event_i_own = Event.create!
     event_i_attend = Event.create!
     event_i_created = Event.create!
-    user = User.create!
+    user = User.create!(email: 't@t.com', password: 'test')
     Attendance.create!(event: event_i_created, user: user, role: :creator)
     Attendance.create!(event: event_i_attend, user: user, role: :guest)
     Attendance.create!(event: event_i_own, user: user, role: :admin)

@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20140519205050) do
 
   create_table "users", force: true do |t|
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
   end
 
 end

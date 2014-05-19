@@ -6,6 +6,7 @@ feature 'Happy Path' do
     click_on 'Register'
     fill_in 'Email', with: 'r@r.com'
     fill_in 'Password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
     click_on 'Submit'
     click_on 'See All Events'
     click_on 'Add Event'

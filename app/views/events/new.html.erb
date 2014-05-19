@@ -1,24 +1,27 @@
-<%= form_for @event do |f| %>
+<div class="event_form">
+  <h2>Please Add an Event</h2>
+  <%= form_for @event do |f| %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
 
-  <%= f.label :date %>
-  <%= f.date_field :date, id: "event_date"%>
+    <%= f.label :date %>
+    <%= f.date_field :date, id: "event_date" %>
 
-  <%= f.label :description %>
-  <%= f.text_area :description %>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
 
-  <%= f.label :location %>
-  <%= f.text_field :location %>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
 
-  <%= f.label :capacity %>
-  <%= f.number_field :capacity %>
+    <%= f.label :capacity %>
+    <%= f.number_field :capacity %>
 
-  <%= f.label :category %>
-  <%= f.text_field :category %>
+    <%= f.label :category %>
+    <%= f.text_field :category %>
 
-  <%= f.submit %>
+    <%= f.submit %>
 
-<% end %>
+  <% end %>
+</div>
 
