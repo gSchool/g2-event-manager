@@ -7,8 +7,14 @@ class UsersController < ApplicationController
     @user = User.new(allowed_parameters)
     @user.save
     session[:current_user_id] = @user.id
+    flash[:notice] = nil
     #current_user
     redirect_to root_path
+  end
+
+  def show
+    @user = User.find(session[:current_user_id]) if session[:current_user_id]
+    @events = @user.events if session[:current_user_id]
   end
 
   private

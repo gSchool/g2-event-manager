@@ -25,7 +25,17 @@ ActiveRecord::Schema.define(version: 20140515222220) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "user_id"
   end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+
+  create_table "events_users", id: false, force: true do |t|
+    t.integer "user_id",  null: false
+    t.integer "event_id", null: false
+  end
+
+  add_index "events_users", ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string "email"
