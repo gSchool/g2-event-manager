@@ -60,4 +60,14 @@ feature 'events managment' do
     expect(page).to have_link '2'
   end
 
+  scenario 'only a user can view open spaces for an event' do
+    visit '/events'
+    click_on 'Ignite Boulder'
+    expect(page).to have_content 'Capacity: 500'
+    click_on 'Logout'
+    visit '/events'
+    click_on 'Ignite Boulder'
+    expect(page).to_not have_content 'Capacity: 500'
+  end
+
 end
