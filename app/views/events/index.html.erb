@@ -1,16 +1,13 @@
 <%= flash.now[:notice] if flash[:notice] %>
 
-
 <%= link_to 'Add Event', new_event_path %>
 
 <ol>
-
   <%= paginate @events %>
-<% @events.each do |event| %>
+  <% @events.each do |event| %>
     <li><a href="events/<%= event.id %>"><%= event.name %></a>
-  <%= event.description %>
-  <%= event.date %>
-  <%= event.location %></li>
-<% end %>
-
+      <%= event.description %>
+      <%= event.date %>
+      <%= event.location %></li>
+  <% end %>
 </ol>

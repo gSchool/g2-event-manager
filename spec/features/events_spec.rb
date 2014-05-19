@@ -17,7 +17,6 @@ feature 'events managment' do
     fill_in 'Capacity', with: 500
     fill_in 'Category', with: 'Boulder Startup Week'
     click_on 'Create Event'
-    user = User.last
     15.times do
       Event.create(name: 'things')
     end

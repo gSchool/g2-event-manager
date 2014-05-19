@@ -6,9 +6,9 @@ class EventsController < ApplicationController
 
   def new
     if !session[:current_user_id]
-      @events = Event.all
+      @events = Event.all.stuff(params[:page])
       flash[:notice] = "You must login to create an event"
-      render :index
+      render 'index'
     else
       @event = Event.new
     end
