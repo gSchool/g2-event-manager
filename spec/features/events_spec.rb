@@ -17,6 +17,10 @@ feature 'events managment' do
     fill_in 'Capacity', with: 500
     fill_in 'Category', with: 'Boulder Startup Week'
     click_on 'Create Event'
+    user = User.last
+    15.times do
+      Event.create(name: 'things')
+    end
   end
 
   scenario 'only a user can add an event' do
@@ -41,6 +45,11 @@ feature 'events managment' do
     click_on 'See All Events'
     click_on 'Add Event'
     expect(page).to have_content('You must login to create an event')
+  end
+
+  scenario 'there are only 10 events per page' do
+    visit '/events'
+    expect(page).to have_link '2'
   end
 
 end
