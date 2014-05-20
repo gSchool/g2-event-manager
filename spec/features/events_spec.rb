@@ -86,7 +86,7 @@ feature 'events managment' do
     event = Event.find_by_name('Ignite Boulder')
     event.update(capacity: 0)
     click_on 'Ignite Boulder'
-    click_on 'RSVP for this Event'
+    click_on 'Add me to Wait List'
     expect(page).to have_content 'You have been waitlisted'
   end
 
