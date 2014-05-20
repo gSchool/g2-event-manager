@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :events
   resources :login
   post '/events/:id/register', to: 'events#register', as: :register_event
+  post '/events/:id/unregister', to: 'events#unregister', as: :unregister_event
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

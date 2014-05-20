@@ -61,6 +61,13 @@ class EventsController < ApplicationController
     redirect_to event
   end
 
+  def unregister
+    user = User.find(session[:current_user_id]) if session[:current_user_id]
+    event = Event.find(params[:id])
+    user.attendances(event: event).clear
+    redirect_to event
+  end
+
   private
   def event_params
     params.require(:event).permit(:name, :date, :description, :location, :capacity, :category)

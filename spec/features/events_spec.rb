@@ -75,7 +75,7 @@ feature 'events managment' do
     expect(page).to have_content('Capacity: 499')
     end
 
-  scenario 'a user can be waitlisted for a full event' do
+  scenario 'a user can be waitlisted for a full event and un-waitlist' do
     click_on 'Logout'
     click_on 'Register'
     fill_in 'Email', with: 'test1@s.com'
@@ -88,6 +88,8 @@ feature 'events managment' do
     click_on 'Ignite Boulder'
     click_on 'Add me to Wait List'
     expect(page).to have_content 'You have been waitlisted'
+    click_on 'Remove me from Wait List'
+    expect(page).to have_link 'Add me to Wait List'
   end
 
   scenario 'only a user can view open spaces for an event' do

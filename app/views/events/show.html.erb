@@ -18,4 +18,6 @@
   <h3><%= link_to 'RSVP for this Event', register_event_path(@event), method: :post %></h3>
 <% elsif @user && !@user.attended_events.include?(@event) && !@user.waitlisted_events.include?(@event) && @event.capacity == 0 %>
   <h3><%= link_to 'Add me to Wait List', register_event_path(@event), method: :post %></h3>
+<% elsif @user && @user.waitlisted_events.include?(@event) %>
+  <h3><%= link_to 'Remove me from Wait List', unregister_event_path(@event), method: :post %></h3>
 <% end %>
