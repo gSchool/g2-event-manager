@@ -14,6 +14,6 @@
 <% if @user && @event.user.id == @user.id %>
   <h3><%= link_to 'Edit this Event', edit_event_path(@event) %></h3>
   <h3><%= link_to 'Delete this Event', @event, method: :delete %></h3>
-<% elsif @user && !@user.attended_events.include?(@event) && @event.capacity > 0 %>
+<% elsif @user && !@user.attended_events.include?(@event) %>
   <h3><%= link_to 'RSVP for this Event', register_event_path(@event), method: :post %> </h3>
 <% end %>

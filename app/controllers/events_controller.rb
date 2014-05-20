@@ -55,7 +55,8 @@ class EventsController < ApplicationController
       event.update(capacity: event.capacity-1)
       flash[:notice] = "Successfully registered"
     else
-      flash[:notice] = "This event is full"
+      event.attendances << Attendance.new(user: user, role: :waitlist)
+      flash[:notice] = "You have been waitlisted"
     end
     redirect_to event
   end

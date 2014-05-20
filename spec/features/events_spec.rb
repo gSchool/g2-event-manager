@@ -75,7 +75,7 @@ feature 'events managment' do
     expect(page).to have_content('Capacity: 499')
     end
 
-  scenario 'a user cannot register for an event if there are no tickets left' do
+  scenario 'a user can be waitlisted for a full event' do
     click_on 'Logout'
     click_on 'Register'
     fill_in 'Email', with: 'test1@s.com'
@@ -86,7 +86,8 @@ feature 'events managment' do
     event = Event.find_by_name('Ignite Boulder')
     event.update(capacity: 0)
     click_on 'Ignite Boulder'
-    expect(page).to_not have_link('RSVP for this Event')
+    click_on 'RSVP for this Event'
+    expect(page).to have_content 'You have been waitlisted'
   end
 
   scenario 'only a user can view open spaces for an event' do

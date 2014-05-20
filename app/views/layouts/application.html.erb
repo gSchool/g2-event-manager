@@ -9,7 +9,7 @@
 <body>
 <header>
   <div class="content">
-    <h1>EventLite</h1>
+    <h1><%= link_to('EventLite', root_path, class: "brand") %></h1>
 
     <div class="authentication">
       <% if current_user != nil %>

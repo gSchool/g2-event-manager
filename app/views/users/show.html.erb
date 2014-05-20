@@ -1,13 +1,35 @@
 <div id="my_events">
   <h1>My events</h1>
-  <% if @events %>
-    <ul>
-      <% @events.each do |event| %>
-        <li><a href="/events/<%= event.id %>"><%= event.name %></a>
-          <%= event.description %>
-          <%= event.date %>
-          <%= event.location %></li>
-      <% end %>
-    </ul>
-  <% end %>
+  <ul>
+    <% @events.each do |event| %>
+      <li><a href="/events/<%= event.id %>"><%= event.name %></a>
+        <%= event.description %>
+        <%= event.date %>
+        <%= event.location %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div id="attending">
+  <h1>Events Attending</h1>
+  <ul>
+    <% @attending.each do |event| %>
+      <li><a href="/events/<%= event.id %>"><%= event.name %></a>
+        <%= event.description %>
+        <%= event.date %>
+        <%= event.location %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div id="waitlisted">
+  <h1>Events Waitlisted</h1>
+  <ul>
+    <% @waitlist.each do |event| %>
+      <li><a href="/events/<%= event.id %>"><%= event.name %></a>
+        <%= event.description %>
+        <%= event.date %>
+        <%= event.location %></li>
+    <% end %>
+  </ul>
 </div>
