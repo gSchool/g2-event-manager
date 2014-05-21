@@ -1,23 +1,35 @@
 <%= flash.now[:notice] %>
 
-<ul>
-  <li><%= @event.name %></li>
-  <li><%= @event.location %></li>
-  <li><%= @event.date %></li>
-  <li><%= @event.description %></li>
-  <% if @user %>
-    <li>Capacity: <%= @event.capacity %></li>
-  <% end %>
-  <li><%= @event.category %></li>
-</ul>
+<div class="event">
 
-<% if @user && @event.user.id == @user.id %>
-  <h3><%= link_to 'Edit this Event', edit_event_path(@event) %></h3>
-  <h3><%= link_to 'Delete this Event', @event, method: :delete %></h3>
-<% elsif @user && !@user.attendances.include?(@event) && @event.capacity > 0 %>
-  <h3><%= link_to 'RSVP for this Event', register_event_path(@event), method: :post %></h3>
-<% elsif @user && !@user.attended_events.include?(@event) && !@user.waitlisted_events.include?(@event) && @event.capacity == 0 %>
-  <h3><%= link_to 'Add me to Wait List', register_event_path(@event), method: :post %></h3>
-<% elsif @user && @user.waitlisted_events.include?(@event) %>
-  <h3><%= link_to 'Remove me from Wait List', unregister_event_path(@event), method: :post %></h3>
-<% end %>
+  <div class="date">
+    <div class="day"><strong><%= @event.date.strftime('%a') %></strong></div>
+    <div class="day"><%= @event.date.strftime('%b %d') %></div>
+  </div>
+  <div class="event_info">
+    <div class="title"><strong><%= @event.name %></strong></div>
+    <div class="time"><strong>When</strong>: <%= @event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+    <div class="description"><%= @event.description %></div>
+    <div class="location"><%= @event.location %></div>
+    <div class="category"><%= @event.category %></div>
+  </div>
+
+  <div class="event_buttons">
+    <% if @user %>
+      <div class="capacity">Capacity: <%= @event.capacity %></div>
+    <% end %>
+
+    <% if @user && @event.user_id == @user.id %>
+      <%= link_to 'Edit this Event', edit_event_path(@event) %>
+
+      <%= link_to 'Delete this Event', @event, method: :delete %>
+    <% elsif @user && !@user.attendances.include?(@event) && @event.capacity > 0 %>
+      <%= link_to 'RSVP for this Event', register_event_path(@event), method: :post %>
+    <% elsif @user && !@user.attended_events.include?(@event) && !@user.waitlisted_events.include?(@event) && @event.capacity == 0 %>
+      <%= link_to 'Add me to Wait List', register_event_path(@event), method: :post %>
+    <% elsif @user && @user.waitlisted_events.include?(@event) %>
+      <%= link_to 'Remove me from Wait List', unregister_event_path(@event), method: :post %>
+    <% end %>
+  </div>
+
+</div>

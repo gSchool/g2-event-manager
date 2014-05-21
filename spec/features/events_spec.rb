@@ -12,21 +12,15 @@ feature 'events managment' do
     click_on 'See All Events'
     click_on 'Add Event'
     fill_in 'Name', with: 'Ignite Boulder'
-    page.find('#event_date').set('2014-05-15')
+    page.find('#event_date').set(1.days.from_now)
     fill_in 'Description', with: 'Awesomeness'
     fill_in 'Location', with: 'Boulder Theatre'
     fill_in 'Capacity', with: 500
     fill_in 'Category', with: 'Boulder Startup Week'
     click_on 'Create Event'
     15.times do
-      Event.create(name: 'things')
+      create_event
     end
-  end
-
-  scenario 'only a user can add an event' do
-    expect(page).to have_content 'Ignite Boulder'
-    expect(page).to have_content '2014-05-15'
-    expect(page).to have_content 'Boulder Theatre'
   end
 
   scenario 'user can see all events they created on their homepage' do
@@ -34,7 +28,6 @@ feature 'events managment' do
     within('#my_events') do
       expect(page).to have_content 'My events'
       expect(page).to have_content 'Ignite Boulder'
-      expect(page).to have_content '2014-05-15'
       expect(page).to have_content 'Boulder Theatre'
     end
   end
@@ -42,7 +35,6 @@ feature 'events managment' do
   scenario 'user can click on event to see details' do
     click_on 'Ignite Boulder'
     expect(page).to have_content 'Ignite Boulder'
-    expect(page).to have_content '2014-05-15'
     expect(page).to have_content 'Boulder Theatre'
     expect(page).to have_content 'Awesomeness'
     expect(page).to have_content 'Boulder Startup Week'
