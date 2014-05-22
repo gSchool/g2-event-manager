@@ -18,7 +18,6 @@ feature 'Happy Path' do
     fill_in 'Category', with: 'Boulder Startup Week'
     click_on 'Create Event'
     expect(page).to have_content 'Ignite Boulder'
-    click_on 'Ignite Boulder'
     click_on 'Edit this Event'
     fill_in 'Location', with: 'Fox Theatre'
     click_on 'Update Event'

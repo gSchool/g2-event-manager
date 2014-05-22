@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     @user = User.find(session[:current_user_id]) if session[:current_user_id]
     event = Event.create(event_params.merge(:user => @user))
     event.attendances << Attendance.new(user: @user, role: :creator)
-    redirect_to @user
+    redirect_to event
   end
 
   def show

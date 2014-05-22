@@ -23,7 +23,6 @@ feature "User can register, logout & login for the site" do
 
     scenario "User cannot login with incorrect password" do
       click_on 'Logout'
-
       click_link 'Login'
       fill_in 'user[email]', with: "joesmith@example.com"
       fill_in 'user[password]', with: "1212"

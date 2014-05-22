@@ -18,6 +18,9 @@ feature 'events managment' do
     fill_in 'Capacity', with: 500
     fill_in 'Category', with: 'Boulder Startup Week'
     click_on 'Create Event'
+    uri = URI.parse(current_url)
+    #"#{uri.path}?#{uri.query}".should == people_path(:search => 'name')
+    expect(uri.path).to have_content /events/
     15.times do
       create_event
     end
@@ -33,6 +36,8 @@ feature 'events managment' do
   end
 
   scenario 'user can click on event to see details' do
+    visit '/'
+    click_on 'See All Events'
     click_on 'Ignite Boulder'
     expect(page).to have_content 'Ignite Boulder'
     expect(page).to have_content 'Boulder Theatre'
