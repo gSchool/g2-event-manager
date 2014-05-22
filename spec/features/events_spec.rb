@@ -18,12 +18,10 @@ feature 'events managment' do
     fill_in 'Capacity', with: 500
     fill_in 'Category', with: 'Boulder Startup Week'
     click_on 'Create Event'
-    uri = URI.parse(current_url)
-    #"#{uri.path}?#{uri.query}".should == people_path(:search => 'name')
-    expect(uri.path).to have_content /events/
-    15.times do
-      create_event
-    end
+  end
+
+  scenario "user gets redirected to the newly created event page after they created the event" do
+    expect(page).to have_content "Edit this Event"
   end
 
   scenario 'user can see all events they created on their homepage' do
@@ -53,11 +51,6 @@ feature 'events managment' do
     expect(page).to have_content('You must login to create an event')
   end
 
-  scenario 'there are only 10 events per page' do
-    visit '/events'
-    expect(page).to have_link '2'
-  end
-
   scenario 'a user can register for an event' do
     click_on 'Logout'
     click_on 'Register'
@@ -70,7 +63,7 @@ feature 'events managment' do
     click_on 'RSVP for this Event'
     expect(page).to have_content('Successfully registered')
     expect(page).to have_content('Capacity: 499')
-    end
+  end
 
   scenario 'a user can be waitlisted for a full event and un-waitlist' do
     click_on 'Logout'
@@ -97,6 +90,14 @@ feature 'events managment' do
     visit '/events'
     click_on 'Ignite Boulder'
     expect(page).to_not have_content 'Capacity: 500'
+  end
+
+  scenario 'there are only 10 events per page' do
+    15.times do
+      create_event
+    end
+    visit '/events'
+    expect(page).to have_link '2'
   end
 
 end
