@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  has_many :attendances
-  has_many :created_events, -> {Attendance.where({role: Attendance.roles[:creator]})}, through: :attendances, source: :event
-  has_many :attended_events, -> {Attendance.where({role: Attendance.roles[:guest]})}, through: :attendances, source: :event
-  has_many :owned_events, -> {Attendance.where({role: Attendance.roles[:admin]})}, through: :attendances, source: :event
-  has_many :waitlisted_events, -> {Attendance.where({role: Attendance.roles[:waitlist]})}, through: :attendances, source: :event
+  has_many :registrations
+  has_many :created_events, -> {Registration.where({role: Registration.roles[:creator]})}, through: :registrations, source: :event
+  has_many :attended_events, -> {Registration.where({role: Registration.roles[:guest]})}, through: :registrations, source: :event
+  has_many :owned_events, -> {Registration.where({role: Registration.roles[:admin]})}, through: :registrations, source: :event
+  has_many :waitlisted_events, -> {Registration.where({role: Registration.roles[:waitlist]})}, through: :registrations, source: :event
   has_secure_password
   has_many :events
   validates :email, presence: true

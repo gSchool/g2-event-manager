@@ -11,21 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521212954) do
+ActiveRecord::Schema.define(version: 20140522210101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "attendances", force: true do |t|
-    t.integer  "event_id"
-    t.integer  "user_id"
-    t.integer  "role"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "attendances", ["event_id"], name: "index_attendances_on_event_id", using: :btree
-  add_index "attendances", ["user_id"], name: "index_attendances_on_user_id", using: :btree
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -45,6 +34,17 @@ ActiveRecord::Schema.define(version: 20140521212954) do
   end
 
   add_index "events_users", ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id", using: :btree
+
+  create_table "registrations", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.integer  "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "registrations", ["event_id"], name: "index_registrations_on_event_id", using: :btree
+  add_index "registrations", ["user_id"], name: "index_registrations_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string "email"

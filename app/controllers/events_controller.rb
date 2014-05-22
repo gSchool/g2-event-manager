@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   def create
     @user = User.find(session[:current_user_id]) if session[:current_user_id]
     event = Event.create(event_params.merge(:user => @user))
-    event.attendances << Attendance.new(user: @user, role: :creator)
+    event.registrations << Registration.new(user: @user, role: :creator)
     redirect_to event
   end
 
@@ -51,10 +51,10 @@ class EventsController < ApplicationController
     user = User.find(session[:current_user_id]) if session[:current_user_id]
     event = Event.find(params[:id])
     if event.tickets_remaining > 0
-      event.attendances.create(user: user, role: :guest)
+      event.registrations.create(user: user, role: :guest)
       flash[:notice] = "Successfully registered"
     else
-      event.attendances.create(user: user, role: :waitlist)
+      event.registrations.create(user: user, role: :waitlist)
       flash[:notice] = "You have been waitlisted"
     end
     redirect_to event
@@ -63,7 +63,7 @@ class EventsController < ApplicationController
   def unregister
     user = User.find(session[:current_user_id]) if session[:current_user_id]
     event = Event.find(params[:id])
-    user.attendances(event: event).clear
+    user.registrations(event: event).clear
     redirect_to event
   end
 

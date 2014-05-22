@@ -11,11 +11,11 @@ describe Event do
       capacity: 1,
       category: "test"
     )
-    Attendance.create!(event: @event, user: user, role: :guest)
+    Registration.create!(event: @event, user: user, role: :guest)
   end
 
   it "can return the number of attendees for a given event" do
-    actual = @event.number_of_attendees
+    actual = @event.number_of_registrations
     expected = 1
     expect(actual).to eq expected
   end

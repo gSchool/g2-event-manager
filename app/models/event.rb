@@ -1,14 +1,14 @@
 class Event < ActiveRecord::Base
   belongs_to :user
-  has_many :attendances
-  has_many :users, through: :attendances
+  has_many :registrations
+  has_many :users, through: :registrations
 
   def tickets_remaining
-    self.capacity - number_of_attendees
+    self.capacity - number_of_registrations
   end
 
-  def number_of_attendees
-    self.attendances.where(role: Attendance.roles[:guest]).size
+  def number_of_registrations
+    self.registrations.where(role: Registration.roles[:guest]).size
   end
 
 end

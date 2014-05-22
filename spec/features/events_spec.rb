@@ -12,7 +12,7 @@ feature 'events managment' do
       category: "test"
     )
     user = User.new(email: 'bob@bob.com', password: '12341234', password_confirmation: '12341234')
-    Attendance.create!(event: event, user: user, role: :guest)
+    Registration.create!(event: event, user: user, role: :guest)
     visit '/'
     click_on 'Register'
     fill_in 'Email', with: 's@s.com'
