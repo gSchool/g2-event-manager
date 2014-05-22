@@ -3,6 +3,16 @@ require 'spec_helper'
 feature 'events managment' do
 
   before do
+    event = Event.create!(
+      name: "Test Meetup",
+      location: "Boulder, CO",
+      date: 1.days.from_now,
+      description: "This is a description",
+      capacity: 1,
+      category: "test"
+    )
+    user = User.new(email: 'bob@bob.com', password: '12341234', password_confirmation: '12341234')
+    Attendance.create!(event: event, user: user, role: :guest)
     visit '/'
     click_on 'Register'
     fill_in 'Email', with: 's@s.com'
@@ -18,6 +28,7 @@ feature 'events managment' do
     fill_in 'Capacity', with: 500
     fill_in 'Category', with: 'Boulder Startup Week'
     click_on 'Create Event'
+
   end
 
   scenario "user gets redirected to the newly created event page after they created the event" do
@@ -62,7 +73,7 @@ feature 'events managment' do
     click_on 'Ignite Boulder'
     click_on 'RSVP for this Event'
     expect(page).to have_content('Successfully registered')
-    expect(page).to have_content('Capacity: 499')
+    expect(page).to have_content('Tickets Remaining: 499')
   end
 
   scenario 'a user can be waitlisted for a full event and un-waitlist' do
@@ -73,9 +84,7 @@ feature 'events managment' do
     fill_in 'Password confirmation', with: 'password'
     click_on 'Submit'
     click_on 'See All Events'
-    event = Event.find_by_name('Ignite Boulder')
-    event.update(capacity: 0)
-    click_on 'Ignite Boulder'
+    click_on 'Test Meetup'
     click_on 'Add me to Wait List'
     expect(page).to have_content 'You have been waitlisted'
     click_on 'Remove me from Wait List'
@@ -85,11 +94,11 @@ feature 'events managment' do
   scenario 'only a user can view open spaces for an event' do
     visit '/events'
     click_on 'Ignite Boulder'
-    expect(page).to have_content 'Capacity: 500'
+    expect(page).to have_content 'Tickets Remaining: 500'
     click_on 'Logout'
     visit '/events'
     click_on 'Ignite Boulder'
-    expect(page).to_not have_content 'Capacity: 500'
+    expect(page).to_not have_content 'Tickets Remaining: 500'
   end
 
   scenario 'there are only 10 events per page' do

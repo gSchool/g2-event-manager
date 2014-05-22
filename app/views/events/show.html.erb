@@ -1,4 +1,3 @@
-
 <% if flash[:notice] %>
   <ul class="flashes">
     <% flash.each do |msg| %>
@@ -22,16 +21,15 @@
 
   <div class="event_buttons">
     <% if @user %>
-      <div class="capacity">Capacity: <%= @event.capacity %></div>
+      <div class="capacity">Tickets Remaining: <%= @event.tickets_remaining %></div>
     <% end %>
 
     <% if @user && @event.user_id == @user.id %>
       <%= link_to 'Edit this Event', edit_event_path(@event) %>
-
       <%= link_to 'Delete this Event', @event, method: :delete %>
-    <% elsif @user && !@user.attendances.include?(@event) && @event.capacity > 0 %>
+    <% elsif @user && !@user.attendances.include?(@event) && @event.tickets_remaining > 0 %>
       <%= link_to 'RSVP for this Event', register_event_path(@event), method: :post %>
-    <% elsif @user && !@user.attended_events.include?(@event) && !@user.waitlisted_events.include?(@event) && @event.capacity == 0 %>
+    <% elsif @user && !@user.attended_events.include?(@event) && !@user.waitlisted_events.include?(@event) && @event.tickets_remaining == 0 %>
       <%= link_to 'Add me to Wait List', register_event_path(@event), method: :post %>
     <% elsif @user && @user.waitlisted_events.include?(@event) %>
       <%= link_to 'Remove me from Wait List', unregister_event_path(@event), method: :post %>

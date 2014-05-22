@@ -50,12 +50,11 @@ class EventsController < ApplicationController
   def register
     user = User.find(session[:current_user_id]) if session[:current_user_id]
     event = Event.find(params[:id])
-    if event.capacity > 0
-      event.attendances << Attendance.new(user: user, role: :guest)
-      event.update(capacity: event.capacity-1)
+    if event.tickets_remaining > 0
+      event.attendances.create(user: user, role: :guest)
       flash[:notice] = "Successfully registered"
     else
-      event.attendances << Attendance.new(user: user, role: :waitlist)
+      event.attendances.create(user: user, role: :waitlist)
       flash[:notice] = "You have been waitlisted"
     end
     redirect_to event
