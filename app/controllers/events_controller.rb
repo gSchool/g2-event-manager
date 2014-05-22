@@ -47,26 +47,6 @@ class EventsController < ApplicationController
     redirect_to '/events'
   end
 
-  def register
-    user = User.find(session[:current_user_id]) if session[:current_user_id]
-    event = Event.find(params[:id])
-    if event.tickets_remaining > 0
-      event.registrations.create(user: user, role: :guest)
-      flash[:notice] = "Successfully registered"
-    else
-      event.registrations.create(user: user, role: :waitlist)
-      flash[:notice] = "You have been waitlisted"
-    end
-    redirect_to event
-  end
-
-  def unregister
-    user = User.find(session[:current_user_id]) if session[:current_user_id]
-    event = Event.find(params[:id])
-    user.registrations(event: event).clear
-    redirect_to event
-  end
-
   private
   def event_params
     params.require(:event).permit(:name, :date, :description, :location, :capacity, :category)

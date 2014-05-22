@@ -28,11 +28,11 @@
       <%= link_to 'Edit this Event', edit_event_path(@event) %>
       <%= link_to 'Delete this Event', @event, method: :delete %>
     <% elsif @user && !@user.registrations.include?(@event) && @event.tickets_remaining > 0 %>
-      <%= link_to 'RSVP for this Event', register_event_path(@event), method: :post %>
+      <%= link_to 'RSVP for this Event', event_registrations_path(@event.id), method: :post %>
     <% elsif @user && !@user.attended_events.include?(@event) && !@user.waitlisted_events.include?(@event) && @event.tickets_remaining == 0 %>
-      <%= link_to 'Add me to Wait List', register_event_path(@event), method: :post %>
+      <%= link_to 'Add me to Wait List', event_registrations_path(@event), method: :post %>
     <% elsif @user && @user.waitlisted_events.include?(@event) %>
-      <%= link_to 'Remove me from Wait List', unregister_event_path(@event), method: :post %>
+      <%= link_to 'Remove me from Wait List', event_registration_path(@event, @user), method: :delete %>
     <% end %>
   </div>
 
