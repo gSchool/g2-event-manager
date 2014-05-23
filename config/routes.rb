@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users
+
   resources :events do
-    resources :registrations, only: [:create, :destroy]
+    member do
+      post 'register' => 'registrations#create'
+      delete 'remove_from_waitlist' => 'registrations#destroy'
+    end
   end
   resources :login
 

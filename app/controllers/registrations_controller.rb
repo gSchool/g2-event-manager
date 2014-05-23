@@ -2,7 +2,7 @@ class RegistrationsController < ApplicationController
 
   def create
     user = User.find(session[:current_user_id]) if session[:current_user_id]
-    event = Event.find(params[:event_id])
+    event = Event.find(params[:id])
     if event.tickets_remaining > 0
       event.add_to_guest_list(user)
       flash[:notice] = "Successfully registered"
@@ -15,7 +15,7 @@ class RegistrationsController < ApplicationController
 
   def destroy
     user = User.find(session[:current_user_id]) if session[:current_user_id]
-    event = Event.find(params[:event_id])
+    event = Event.find(params[:id])
     event.remove_from_waitlist(user)
     redirect_to event
   end
