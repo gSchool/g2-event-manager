@@ -45,11 +45,21 @@ describe Event do
     expect(@event.waitlist).to_not include @user
   end
 
-  it 'can manage a wait list' do
+  it 'can manage a guest list with overflow to a waitlist' do
     expect(@event.guest_list).to_not include @user
 
-    @event.add_to_guest_list(@user)
+    result = @event.add_to_guest_list(@user)
 
+    expect(result).to eq :guest_list
     expect(@event.guest_list).to include @user
+
+    another_user = User.create!(email: 'sue@sue.com', password: '12341234', password_confirmation: '12341234')
+
+    result = @event.add_to_guest_list(another_user)
+
+    expect(result).to_not eq :guest_list
+    expect(@event.guest_list.length).to eq 1
+    expect(@event.waitlist.length).to eq 1
+    expect(@event.waitlist).to include another_user
   end
 end

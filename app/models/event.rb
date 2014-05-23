@@ -28,6 +28,12 @@ class Event < ActiveRecord::Base
   end
 
   def add_to_guest_list(user)
-    self.registrations.create(user: user, role: Registration.roles[:guest])
+    if tickets_remaining > 0
+      self.registrations.create(user: user, role: Registration.roles[:guest])
+      return :guest_list
+    else
+      self.registrations.create(user: user, role: Registration.roles[:waitlist])
+      return :waitlist
+    end
   end
 end
