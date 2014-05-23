@@ -11,4 +11,16 @@ class Event < ActiveRecord::Base
     self.registrations.where(role: Registration.roles[:guest]).size
   end
 
+  def waitlist
+    self.users.where('registrations.role = ?', Registration.roles[:waitlist])
+  end
+
+  def add_to_waitlist(user)
+    self.registrations.create(user: user, role: Registration.roles[:waitlist])
+  end
+
+  def remove_from_waitlist(user)
+    self.registrations.find_by(user: user, role: Registration.roles[:waitlist]).destroy
+  end
+
 end

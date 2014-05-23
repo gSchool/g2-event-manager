@@ -114,6 +114,7 @@ feature 'events managment' do
     visit event_path(event)
     click_on 'Remove me from Wait List'
     expect(page).to have_link 'Add me to Wait List'
+
     visit user_path(another_user)
     within('#waitlisted') do
       expect(page).to have_no_content 'Test Meetup'
