@@ -4,7 +4,7 @@ class RegistrationsController < ApplicationController
     user = User.find(session[:current_user_id]) if session[:current_user_id]
     event = Event.find(params[:event_id])
     if event.tickets_remaining > 0
-      event.registrations.create(user: user, role: :guest)
+      event.add_to_guest_list(user)
       flash[:notice] = "Successfully registered"
     else
       event.add_to_waitlist(user)

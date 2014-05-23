@@ -23,4 +23,11 @@ class Event < ActiveRecord::Base
     self.registrations.find_by(user: user, role: Registration.roles[:waitlist]).destroy
   end
 
+  def guest_list
+    self.users.where('registrations.role = ?', Registration.roles[:guest])
+  end
+
+  def add_to_guest_list(user)
+    self.registrations.create(user: user, role: Registration.roles[:guest])
+  end
 end
