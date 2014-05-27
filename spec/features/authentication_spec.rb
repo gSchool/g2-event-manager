@@ -24,5 +24,11 @@ feature "User can register, logout & login for the site" do
      user_register("")
       expect(page).to have_content "Email can't be blank"
     end
+    scenario "User cannot register with an already existing email address" do
+      user_register
+      click_on 'Logout'
+      user_register
+      expect(page).to have_content "Email has already been taken"
+    end
   end
 end
