@@ -12,7 +12,7 @@
     <h1><%= link_to('EventLite', root_path, class: "brand") %></h1>
 
     <div class="authentication">
-      <% if current_user != nil %>
+      <% if current_user %>
         <%= link_to current_user.email, current_user %>
         <%= link_to 'Logout', login_path(current_user), method: :delete, class: "logout" %>
       <% else %>

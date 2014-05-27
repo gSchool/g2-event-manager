@@ -13,12 +13,7 @@ feature 'events managment' do
     )
     user = User.new(email: 'bob@bob.com', password: '12341234', password_confirmation: '12341234')
     Registration.create!(event: event, user: user, role: :guest)
-    visit '/'
-    click_on 'Register'
-    fill_in 'Email', with: 's@s.com'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
-    click_on 'Submit'
+    user_register('s@s.com')
     click_on 'See All Events'
     click_on 'Add Event'
     fill_in 'Name', with: 'Ignite Boulder'
@@ -64,11 +59,7 @@ feature 'events managment' do
 
   scenario 'a user can register for an event' do
     click_on 'Logout'
-    click_on 'Register'
-    fill_in 'Email', with: 'test@s.com'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
-    click_on 'Submit'
+    user_register
     click_on 'See All Events'
     click_on 'Ignite Boulder'
     click_on 'RSVP for this Event'
@@ -78,11 +69,7 @@ feature 'events managment' do
 
   scenario 'a user can be waitlisted for a full event and un-waitlist' do
     click_on 'Logout'
-    click_on 'Register'
-    fill_in 'Email', with: 'test1@s.com'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
-    click_on 'Submit'
+    user_register
     click_on 'See All Events'
     click_on 'Test Meetup'
     click_on 'Add me to Wait List'

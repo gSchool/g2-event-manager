@@ -15,28 +15,24 @@ class EventsController < ApplicationController
   end
 
   def create
-    @user = User.find(session[:current_user_id]) if session[:current_user_id]
-    event = Event.create(event_params.merge(:user => @user))
-    event.registrations << Registration.new(user: @user, role: :creator)
+    event = Event.create(event_params.merge(:user => current_user))
+    event.registrations << Registration.new(user: current_user, role: :creator)
     redirect_to event
   end
 
   def show
-    @user = User.find(session[:current_user_id]) if session[:current_user_id]
     @event = Event.find(params[:id])
   end
 
   def edit
     @event = Event.find(params[:id])
-    user = User.find(session[:current_user_id]) if session[:current_user_id]
-    if @event.user.id != user.id
+    if @event.user.id != current_user.id
       flash[:notice] = "You can't be here"
       redirect_to '/events'
     end
   end
 
   def update
-    @user = User.find(session[:current_user_id]) if session[:current_user_id]
     @event = Event.find(params[:id])
     @event.update(event_params)
     redirect_to @event
