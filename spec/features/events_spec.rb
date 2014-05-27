@@ -56,6 +56,11 @@ feature 'events managment' do
     click_on 'RSVP for this Event'
     expect(page).to have_content('Successfully registered')
     expect(page).to have_content('Tickets Remaining: 499')
+
+    click_on 'Unregister for this Event'
+    expect(page).to have_content('You are no longer registered for this event')
+    expect(page).to have_content('Tickets Remaining: 500')
+
   end
 
   scenario 'a user can be waitlisted for a full event and un-waitlist' do

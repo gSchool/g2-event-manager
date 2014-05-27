@@ -11,4 +11,10 @@ module ObjectCreationMethods
     )
   end
 
+  def create_user
+    User.create(email: "bob@bob.com", password: "gSchool123")
+  end
+
+
+
 end
