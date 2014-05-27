@@ -1,5 +1,5 @@
 module UserMethods
-  def user_register(email="joesmith@example.com", password="1234", confirmation="1234")
+  def user_register(email="joesmith@example.com", password="Gschool123", confirmation="Gschool123")
     visit '/'
     click_on 'Register'
     fill_in 'user[email]', with: email
@@ -8,7 +8,7 @@ module UserMethods
     click_on 'Submit'
   end
 
-  def user_login(email="joesmith@example.com", password="1234")
+  def user_login(email="joesmith@example.com", password="Gschool123")
     click_link 'Login'
     fill_in 'user[email]', with: email
     fill_in 'user[password]', with: password
