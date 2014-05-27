@@ -30,5 +30,9 @@ feature "User can register, logout & login for the site" do
       user_register
       expect(page).to have_content "Email has already been taken"
     end
+    scenario 'user cannot register with an invalid email address' do
+      user_register('jjkawd')
+      expect(page).to have_content "Email must be valid"
+    end
   end
 end
