@@ -5,12 +5,12 @@ class EventsController < ApplicationController
   end
 
   def new
-    if !session[:current_user_id]
+    if logged_in?
+      @event = Event.new
+    else
       @events = Event.all.stuff(params[:page])
       flash[:notice] = "You must login to create an event"
       render 'index'
-    else
-      @event = Event.new
     end
   end
 
@@ -21,26 +21,26 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    find_event
   end
 
   def edit
-    @event = Event.find(params[:id])
+    find_event
     if @event.user.id != current_user.id
       flash[:notice] = "You can't be here"
-      redirect_to '/events'
+      redirect_to events_path
     end
   end
 
   def update
-    @event = Event.find(params[:id])
+    find_event
     @event.update(event_params)
-    redirect_to @event
+    redirect_to event_path
   end
 
   def destroy
     Event.find(params[:id]).destroy
-    redirect_to '/events'
+    redirect_to events_path
   end
 
   private
@@ -48,6 +48,10 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :date, :description, :location, :capacity, :category)
+  end
+
+  def find_event
+    @event = Event.find(params[:id])
   end
 end
 
