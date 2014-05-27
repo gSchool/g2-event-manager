@@ -19,4 +19,5 @@ RSpec.configure do |config|
   config.order = "random"
   config.include ObjectCreationMethods
   config.include UserMethods
+  config.include EventMethods
 end

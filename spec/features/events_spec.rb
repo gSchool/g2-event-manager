@@ -14,16 +14,7 @@ feature 'events managment' do
     user = User.new(email: 'bob@bob.com', password: '12341234', password_confirmation: '12341234')
     Registration.create!(event: event, user: user, role: :guest)
     user_register('s@s.com')
-    click_on 'See All Events'
-    click_on 'Add Event'
-    fill_in 'Name', with: 'Ignite Boulder'
-    page.find('#event_date').set(1.days.from_now)
-    fill_in 'Description', with: 'Awesomeness'
-    fill_in 'Location', with: 'Boulder Theatre'
-    fill_in 'Capacity', with: 500
-    fill_in 'Category', with: 'Boulder Startup Week'
-    click_on 'Create Event'
-
+    new_event
   end
 
   scenario "user gets redirected to the newly created event page after they created the event" do
