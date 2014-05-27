@@ -12,6 +12,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :current_user
+  def register_user_for_event(user, event)
+    Registration.create(event_id: event.id, user_id: user.id)
+  end
 
+  def unregister_user_for_event(user, event)
+    event.capacity += 1
+    Registration.find_by(event_id: event.id, user_id: user.id).destroy
+  end
+  
+  helper_method :unregister_user_for_event
+  helper_method :register_user_for_event
+  helper_method :current_user
 end

@@ -23,13 +23,16 @@
     <% if current_user %>
       <div class="capacity">Tickets Remaining: <%= @event.tickets_remaining %></div>
     <% end %>
-
     <% if current_user %>
       <% if @event.user_id == current_user.id %>
         <%= link_to 'Edit this Event', edit_event_path(@event) %>
         <%= link_to 'Delete this Event', @event, method: :delete %>
-      <% elsif !current_user.registrations.include?(@event) && @event.tickets_remaining > 0 %>
+      <% elsif !current_user.registrations.exists?(event_id: @event.id) && @event.tickets_remaining > 0 %>
         <%= link_to 'RSVP for this Event', event_registrations_path(@event.id), method: :post %>
+
+      <% elsif current_user.registrations.exists?(event_id: @event.id) && @event.tickets_remaining > 0 %>
+        <% @registration_id = current_user.registrations.find_by(event_id: @event.id) %>
+        <%= link_to 'Unregister for this Event', event_registration_path(@event.id, @registration_id.id), method: :delete %>
       <% elsif !current_user.attended_events.include?(@event) && !current_user.waitlisted_events.include?(@event) && @event.tickets_remaining == 0 %>
         <%= link_to 'Add me to Wait List', event_registrations_path(@event), method: :post %>
       <% elsif current_user.waitlisted_events.include?(@event) %>
