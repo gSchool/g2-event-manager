@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user
+    if logged_in?
       @events = current_user.created_events
       @attending = current_user.attended_events
       @waitlist = current_user.waitlisted_events

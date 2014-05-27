@@ -18,6 +18,7 @@ group :development, :test do
   gem 'capybara', '~> 2.2.1'
   gem 'launchy', '~> 2.4.2'
   gem 'faker', '~> 1.3.0'
+  gem 'byebug'
 end
 
 
