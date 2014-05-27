@@ -14,11 +14,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    if session[:current_user_id]
-      @user = User.find(session[:current_user_id])
-      @events = @user.created_events
-      @attending = @user.attended_events
-      @waitlist = @user.waitlisted_events
+    if logged_in?
+      @events = current_user.created_events
+      @attending = current_user.attended_events
+      @waitlist = current_user.waitlisted_events
     else
       redirect_to root_path
     end

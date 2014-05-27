@@ -12,6 +12,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :current_user
+  def logged_in?
+    if session[:current_user_id]
+      true
+    else
+      false
+    end
+  end
+
+  helper_method :current_user, :logged_in?
 
 end
