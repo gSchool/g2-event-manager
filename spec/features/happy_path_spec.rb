@@ -27,4 +27,13 @@ feature 'Happy Path' do
       expect(page).to have_content 'Ignite Boulder'
     end
   end
+  scenario 'Registered user can request and receive a new password' do
+    user_register
+    click_on 'Logout'
+    click_on 'Login'
+    click_on 'Forgot password'
+    fill_in 'Email', with: "joesmith@example.com"
+    click_on 'Reset password'
+    expect(page).to have_content "Email has been sent"
+  end
 end

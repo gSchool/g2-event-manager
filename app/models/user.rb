@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   validates :email, format: {with: /([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})/, message: " must be valid"}
   validates :password, format: {with: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}/, message: " must be valid"}
+
+  def lost_password
+    self.update_attributes(token: SecureRandom.uuid)
+  end
 end

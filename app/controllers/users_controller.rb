@@ -23,6 +23,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def reset_password
+    user = User.find(params[:id])
+    user.lost_password
+    link = lost_password_path + "/?token=#{user.token}"
+    UserMailer.forgot_password(user, link).deliver
+    redirect_to login_path, notice: "Your password has been sent to you"
+  end
+
+  def reset_password_form
+    @user = User.find(params[:id])
+    token = params[:token]
+    if @user.token == token
+      @user.token=nil
+    else
+      redirect_to login_path, notice: "Not allowed to access this page"
+    end
+  end
+
   private
 
   def allowed_parameters
