@@ -1,10 +1,9 @@
 class UserMailer < ActionMailer::Base
   default from: 'info@example.com'
 
-  def forgot_password(user, link)
+  def forgot_password(user, token)
     @user = user
-    @link = link
-    @link = "#{users_path}/#{SecureRandom.uuid}"
-    mail(to: @user, subject: 'Password reset')
+    @link = "/reset_password/#{token}"
+    mail(to: @user.email, subject: 'Password reset')
   end
 end

@@ -1,6 +1,6 @@
 <div class="authentication_form">
   <h2>Please Login</h2>
-  <% if flash[:error] %>
+  <% if flash[:error] || flash[:notice] %>
     <ul class="flashes">
       <% flash.each do |msg| %>
         <li class="<%= msg[0] %>"><%= msg[1] %></li>
@@ -19,4 +19,6 @@
     </p>
     <%= f.submit "Submit" %>
   <% end %>
+  <%= link_to 'Forgot password?', new_reset_passwords_path %>
+
 </div>

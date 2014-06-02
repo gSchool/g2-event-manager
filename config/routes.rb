@@ -7,5 +7,8 @@ Rails.application.routes.draw do
     resources :registrations, only: [:create, :destroy]
   end
   resources :login
+  resource :reset_passwords
+  get '/reset_password/:token', to: 'reset_passwords#edit', as: :edit_password
+  patch '/reset_password/:token', to: 'reset_passwords#update', as: :update_password
 
 end

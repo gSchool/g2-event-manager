@@ -1,0 +1,6 @@
+<p>Forgot Password?</p>
+<p>Enter your email and we'll send you a reset link.</p>
+<%= form_tag reset_passwords_path, method: :post %>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %>
+  <%= submit_tag 'Reset Password' %>

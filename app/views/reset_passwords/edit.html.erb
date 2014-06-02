@@ -1,0 +1,7 @@
+<%= form_for @user, url: :update_password do |f| %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.submit 'Update Password' %>
+<% end %>
