@@ -14,7 +14,10 @@ class RegistrationsController < ApplicationController
 
   def destroy
     event = Event.find(params[:event_id])
-    unregister_user_for_event(current_user, event)
+    user = current_user
+    event.capacity += 1
+    Registration.find_by(event_id: event.id, user_id: user.id).destroy
+
     flash[:notice] = "You are no longer registered for this event"
 
     redirect_to event
