@@ -1,7 +1,5 @@
 <%= flash.now[:notice] if flash[:notice] %>
 
-<%= link_to 'Add Event', new_event_path %>
-
 <ul class="events">
   <% @events.each do |event| %>
     <li class="event_synopsis">

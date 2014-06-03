@@ -15,7 +15,7 @@ header {
     float: right;
     padding: .6em 0;
   }
-  a.register, a.logout, a.login, a.my_events {
+  a.register, a.logout, a.login, a.my_events, a.add_event {
     text-decoration: none;
     padding: .3em .6em;
     background-color: #49AEC0;
@@ -29,5 +29,10 @@ header {
 
   a.my_events {
     background-color: lightblue;
+  }
+
+  a.add_event {
+    background-color: white;
+    color: #49AEC0;
   }
 }

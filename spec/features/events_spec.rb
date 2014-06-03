@@ -26,7 +26,8 @@ feature 'events managment' do
     end
 
     scenario "user can create and see the event they created" do
-      visit new_event_path
+      visit '/'
+      click_on 'Add Event'
       fill_in 'Name', with: 'Ignite Boulder'
       # this sets the date for the event
       page.find('#event_date').set(1.days.from_now)

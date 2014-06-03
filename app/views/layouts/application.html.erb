@@ -12,6 +12,7 @@
     <h1><%= link_to('EventLite', root_path, class: "brand") %></h1>
 
     <div class="authentication">
+      <%= link_to 'Add Event', new_event_path, class: "add_event" %>
       <% if current_user %>
         <%= current_user.email %>
         <%= link_to 'My Events', current_user, class: "my_events" %>
