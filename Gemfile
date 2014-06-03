@@ -12,6 +12,7 @@ gem 'kaminari', '~> 0.15.1'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'rails_12factor', group: :production
 gem 'bcrypt', '~> 3.1.7'
+gem 'timecop', '~> 0.7.1', group: :test
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'
