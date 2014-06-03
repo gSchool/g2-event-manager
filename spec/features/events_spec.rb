@@ -6,14 +6,12 @@ feature 'events managment' do
     fill_in 'user[email]', with: user.email
     fill_in 'user[password]', with: user.password
     click_on 'Submit'
-    click_link 'See All Events'
     click_link 'Add Event'
   end
 
   describe "Guest access" do
     scenario 'Guests cannot create an event' do
       visit root_path
-      click_on 'See All Events'
       click_on 'Add Event'
       expect(page).to have_content('You must login to create an event')
     end
@@ -23,6 +21,22 @@ feature 'events managment' do
     before do
       @user = User.create!(email: 'bob@bob.com', password: 'aB12341234', password_confirmation: 'aB12341234')
       log_in(@user)
+    end
+
+    scenario "user can see a list of events on the index page" do
+      visit '/'
+      click_on 'Add Event'
+      fill_in 'Name', with: 'Ignite Boulder'
+      # this sets the date for the event
+      page.find('#event_date').set(1.days.from_now)
+      fill_in 'Description', with: 'Awesomeness'
+      fill_in 'Location', with: 'Boulder Theatre'
+      fill_in 'Capacity', with: 500
+      fill_in 'Category', with: 'Boulder Startup Week'
+      click_on 'Create Event'
+      visit ('/')
+      expect(page).to have_content 'Ignite Boulder'
+
     end
 
     scenario "user can create and see the event they created" do
@@ -73,7 +87,6 @@ feature 'events managment' do
       )
 
       visit root_path
-      click_on 'See All Events'
       click_on 'Ignite Boulder'
       click_on 'RSVP for this Event'
       expect(page).to have_content('Successfully registered')
@@ -97,9 +110,7 @@ feature 'events managment' do
       Registration.create!(event: event, user: another_user, role: :guest)
 
       visit root_path
-      click_on 'See All Events'
       click_on 'Ignite Boulder'
-
       click_on 'Add me to Wait List'
       expect(page).to have_content 'You have been waitlisted'
       click_on 'Remove me from Wait List'

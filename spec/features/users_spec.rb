@@ -19,7 +19,7 @@ feature 'Users' do
     new_event
     click_on 'Logout'
     user_register("s@s.com")
-    click_on 'See All Events'
+
     click_on 'Ignite Boulder'
     click_on 'RSVP for this Event'
     click_on 'My Events'

@@ -1,7 +1,6 @@
 module EventMethods
 
   def new_event(name="Ignite Boulder")
-    click_on 'See All Events'
     click_on 'Add Event'
     fill_in 'Name', with: name
     page.find('#event_date').set(1.days.from_now)

@@ -1,5 +1,21 @@
 <% flash.each do |name, msg| -%>
   <%= content_tag :div, msg, class: name %>
 <% end -%>
-<a href="/events">See All Events</a>
+
+<ul class="events">
+  <% @events.each do |event| %>
+    <li class="event_synopsis">
+      <div class="date">
+        <div class="day"><strong><%= event.date.strftime('%a') %></strong></div>
+        <div class="day"><%= event.date.strftime('%b %d') %></div>
+      </div>
+      <div class="event_info">
+        <div class="title"><a href="events/<%= event.id %>"><%= event.name %></a></div>
+        <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @events %>
 
