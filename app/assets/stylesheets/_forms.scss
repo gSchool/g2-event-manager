@@ -25,8 +25,9 @@
   }
   input[type="submit"] {
     padding: .3em .6em;
-    width: 8em;
+    max-width: 10em;
     margin-top: 1.2em;
+    margin-bottom: .6em;
     background-color: #803D44;
     color: #ffffff;
     font-weight: bold;
