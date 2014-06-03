@@ -51,5 +51,4 @@ ActiveRecord::Schema.define(version: 20140527225502) do
     t.string "password_digest"
     t.string "token"
   end
-
 end

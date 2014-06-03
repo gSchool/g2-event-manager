@@ -22,7 +22,9 @@ feature 'Users' do
     click_on 'See All Events'
     click_on 'Ignite Boulder'
     click_on 'RSVP for this Event'
-    click_on 's@s.com'
+    click_on 'My Events'
+    expect(page).to have_content 's@s.com'
+
     within '#attending' do
       expect(page).to have_content 'Ignite Boulder'
     end

@@ -45,7 +45,7 @@ feature 'events managment' do
       expect(page).to have_content "Edit this Event"
 
       # make sure the user can see the event
-      click_on 'bob@bob.com'
+      click_on 'My Events'
       within('#my_events') do
         expect(page).to have_content 'My events'
         expect(page).to have_content 'Ignite Boulder'

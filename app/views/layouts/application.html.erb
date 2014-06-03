@@ -13,7 +13,8 @@
 
     <div class="authentication">
       <% if current_user %>
-        <%= link_to current_user.email, current_user %>
+        <%= current_user.email %>
+        <%= link_to 'My Events', current_user, class: "my_events" %>
         <%= link_to 'Logout', login_path(current_user), method: :delete, class: "logout" %>
       <% else %>
         <%= link_to 'Register', new_user_path, class: "register" %>
