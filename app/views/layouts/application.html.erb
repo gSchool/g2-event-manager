@@ -12,12 +12,13 @@
     <h1><%= link_to('EventLite', root_path, class: "brand") %></h1>
 
     <div class="authentication">
-      <%= link_to 'Add Event', new_event_path, class: "add_event" %>
       <% if current_user %>
         <%= current_user.email %>
+        <%= link_to 'Add Event', new_event_path, class: "add_event" %>
         <%= link_to 'My Events', current_user, class: "my_events" %>
         <%= link_to 'Logout', login_path(current_user), method: :delete, class: "logout" %>
       <% else %>
+        <%= link_to 'Add Event', new_event_path, class: "add_event" %>
         <%= link_to 'Register', new_user_path, class: "register" %>
         <%= link_to 'Login', new_login_path, class: "login" %>
       <% end %>
