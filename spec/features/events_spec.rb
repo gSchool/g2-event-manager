@@ -49,6 +49,7 @@ feature 'events managment' do
       fill_in 'Location', with: 'Boulder Theatre'
       fill_in 'Capacity', with: 500
       fill_in 'Category', with: 'Boulder Startup Week'
+      attach_file('Event pic', Rails.root.join('spec/images/image.png'))
       click_on 'Create Event'
 
       # more expectations
@@ -58,6 +59,7 @@ feature 'events managment' do
       expect(page).to have_content 'Boulder Startup Week'
       expect(page).to have_content '500'
       expect(page).to have_content "Edit this Event"
+      expect(page).to have_css('img', visible: 'image.png')
 
       # make sure the user can see the event
       click_on 'My Events'

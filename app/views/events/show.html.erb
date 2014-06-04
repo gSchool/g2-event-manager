@@ -17,7 +17,10 @@
     <div class="description"><%= @event.description %></div>
     <div class="location"><%= @event.location %></div>
     <div class="category"><%= @event.category %></div>
+    <div class="image"><%= image_tag(@event.event_pic) %></div>
   </div>
+
+
 
   <div class="event_buttons">
     <% if current_user %>

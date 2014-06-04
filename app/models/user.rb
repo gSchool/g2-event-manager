@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+
+
   has_many :registrations
   has_many :created_events, -> {Registration.where({role: Registration.roles[:creator]})}, through: :registrations, source: :event
   has_many :attended_events, -> {Registration.where({role: Registration.roles[:guest]})}, through: :registrations, source: :event

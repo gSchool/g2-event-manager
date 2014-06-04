@@ -15,7 +15,9 @@ class EventsController < ApplicationController
   end
 
   def create
+
     event = Event.create(event_params.merge(:user => current_user))
+    event.event_pic = params[:event][:event_pic]
     event.registrations << Registration.new(user: current_user, role: :creator)
     redirect_to event
   end
@@ -47,7 +49,7 @@ class EventsController < ApplicationController
 
 
   def event_params
-    params.require(:event).permit(:name, :date, :description, :location, :capacity, :category)
+    params.require(:event).permit(:name, :date, :description, :location, :capacity, :category, :event_pic)
   end
 
   def find_event

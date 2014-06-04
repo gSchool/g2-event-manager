@@ -20,3 +20,6 @@ Please follow the steps below to get this site set up for local development.
 1. `bundle`
 1. `rake db:create`
 1. `rake db:migrate`
+
+Please note that this application is using carrierwave with rmagick. Please install 'imagemagick' prior to using this app through whatever
+ means you use (i.e. if you use homebrew: `brew install imagemagick`).

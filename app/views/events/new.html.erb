@@ -20,7 +20,10 @@
     <%= f.label :category %>
     <%= f.text_field :category %>
 
-    <%= f.submit %>
+    <%= f.label :event_pic %>
+    <%= f.file_field :event_pic %>
+
+    <%= f.submit "Create Event" %>
 
   <% end %>
 </div>

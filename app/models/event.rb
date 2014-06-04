@@ -1,4 +1,9 @@
+require 'carrierwave/orm/activerecord'
+
 class Event < ActiveRecord::Base
+
+  mount_uploader :event_pic, EventPictureUploader
+
   belongs_to :user
   has_many :registrations
   has_many :users, through: :registrations
