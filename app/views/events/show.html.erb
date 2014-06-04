@@ -16,6 +16,7 @@
     <div class="time"><strong>When</strong>: <%= @event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
     <div class="description"><%= @event.description %></div>
     <div class="location"><%= @event.location %></div>
+    <div class="city"><%= @event.city %></div>
     <div class="category"><%= @event.category %></div>
     <div class="image"><%= image_tag(@event.event_pic) %></div>
   </div>

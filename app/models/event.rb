@@ -8,6 +8,11 @@ class Event < ActiveRecord::Base
   has_many :registrations
   has_many :users, through: :registrations
 
+  def self.search(query)
+    where("city like ?", "%#{query}%")
+  end
+
+
   def tickets_remaining
     self.capacity - number_of_registrations
   end

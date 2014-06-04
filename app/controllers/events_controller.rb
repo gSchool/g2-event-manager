@@ -1,7 +1,11 @@
 class EventsController < ApplicationController
 
   def index
-    @events = Event.all.order(:date).stuff(params[:page])
+    if params[:search]
+      @events = Event.search(params[:search])
+    else
+      @events = Event.all.order(:date).stuff(params[:page])
+    end
   end
 
   def new
@@ -45,11 +49,12 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+
   private
 
 
   def event_params
-    params.require(:event).permit(:name, :date, :description, :location, :capacity, :category, :event_pic)
+    params.require(:event).permit(:name, :date, :description, :location, :capacity, :category, :city, :event_pic)
   end
 
   def find_event
