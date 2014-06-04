@@ -1,7 +1,11 @@
-<%= form_for @user, url: :update_password do |f| %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit 'Update Password' %>
-<% end %>
+<div class="authentication_form">
+  <p><h2>Reset Your Password</h2></p>
+
+  <%= form_for @user, url: :update_password do |f| %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+    <%= f.submit 'Update Password' %>
+  <% end %>
+</div>
