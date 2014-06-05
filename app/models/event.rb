@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   has_many :users, through: :registrations
 
   def self.search(query)
-    where("city like ?", "%#{query}%")
+    where("city iLIKE ?", "%#{query}%")
   end
 
 

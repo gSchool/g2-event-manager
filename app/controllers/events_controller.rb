@@ -2,9 +2,9 @@ class EventsController < ApplicationController
 
   def index
     if params[:search]
-      @events = Event.search(params[:search])
+      @events = Event.search(params[:search]).order(:date).page(params[:page])
     else
-      @events = Event.all.order(:date).stuff(params[:page])
+      @events = Event.all.order(:date).page(params[:page])
     end
   end
 
@@ -12,7 +12,7 @@ class EventsController < ApplicationController
     if logged_in?
       @event = Event.new
     else
-      @events = Event.all.stuff(params[:page])
+      @events = Event.all.page(params[:page])
       flash[:notice] = "You must login to create an event"
       render 'index'
     end
