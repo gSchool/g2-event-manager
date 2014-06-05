@@ -10,6 +10,9 @@
   <div class="date">
     <div class="day"><strong><%= @event.date.strftime('%a') %></strong></div>
     <div class="day"><%= @event.date.strftime('%b %d') %></div>
+    <% if @event.event_pic.present? -%>
+      <%= image_tag(@event.event_pic) -%>
+    <% end -%>
   </div>
   <div class="event_info">
     <div class="title"><strong><%= @event.name %></strong></div>
@@ -17,7 +20,6 @@
     <div class="description"><%= @event.description %></div>
     <div class="location"><%= @event.location %></div>
     <div class="category"><%= @event.category %></div>
-    <div class="image"><%= image_tag(@event.event_pic) %></div>
   </div>
 
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'events managment' do
+feature 'events management' do
   def log_in(user)
     visit new_login_path
     fill_in 'user[email]', with: user.email
@@ -76,6 +76,15 @@ feature 'events managment' do
       expect(page).to have_content 'Awesomeness'
       expect(page).to have_content 'Boulder Startup Week'
       expect(page).to have_content '500'
+    end
+
+    scenario "user cannot submit an empty event form" do
+      visit '/'
+      click_on 'Add Event'
+      click_on 'Create Event'
+
+      expect(page).to have_content "Name can't be blank"
+      expect(page).to have_content "Description can't be blank"
     end
 
     scenario 'a user can register for an event' do

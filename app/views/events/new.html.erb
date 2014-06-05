@@ -1,6 +1,15 @@
 <div class="event_form">
   <h2>Please Add an Event</h2>
   <%= form_for @event do |f| %>
+    <% if @event.errors.present? %>
+      <div class="errors">
+        <ul class="errors">
+          <% @event.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
     <%= f.label :name %>
     <%= f.text_field :name %>
