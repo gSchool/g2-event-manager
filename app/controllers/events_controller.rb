@@ -19,11 +19,13 @@ class EventsController < ApplicationController
   end
 
   def create
-
-    event = Event.create(event_params.merge(:user => current_user))
-    event.event_pic = params[:event][:event_pic]
-    event.registrations << Registration.new(user: current_user, role: :creator)
-    redirect_to event
+    @event = Event.new(event_params.merge(:user => current_user))
+    if @event.save
+      @event.registrations << Registration.new(user: current_user, role: :creator)
+      redirect_to event_path(@event)
+    else
+      render new_event_path
+    end
   end
 
   def show
