@@ -31,7 +31,7 @@ feature 'Users' do
   end
 
   scenario 'user can reset their password' do
-    user = User.create!(email: 'user@example.com', password: 'Password1')
+    user = User.create!(email: 'user@example.com', password: 'Password1', email_confirmed: true)
     mail_sent = ActionMailer::Base.deliveries.length
 
     visit '/'
