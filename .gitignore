@@ -17,3 +17,8 @@
 
 .idea
 .env
+/public/app
+/public/public
+/public/uploads
+
+
