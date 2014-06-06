@@ -6,7 +6,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(allowed_parameters)
     if @user.save
-      session[:current_user_id] = @user.id
+      token = SecureRandom.uuid
+      @user.update(token: token)
+      UserMailer.new_registration(@user).deliver
+      flash[:notice] = 'A confirmation email has been sent to your email address'
       redirect_to root_path
     else
       render :new
@@ -26,6 +29,6 @@ class UsersController < ApplicationController
   private
 
   def allowed_parameters
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :email_confirmed)
   end
 end

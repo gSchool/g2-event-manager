@@ -19,7 +19,7 @@ feature 'events management' do
 
   describe "with a logged in user" do
     before do
-      @user = User.create!(email: 'bob@bob.com', password: 'aB12341234', password_confirmation: 'aB12341234')
+      @user = User.create!(email: 'bob@bob.com', password: 'aB12341234', password_confirmation: 'aB12341234', email_confirmed: true)
       log_in(@user)
     end
 
