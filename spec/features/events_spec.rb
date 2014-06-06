@@ -63,11 +63,9 @@ feature 'events management' do
 
       # make sure the user can see the event
       click_on 'My Events'
-      within('#my_events') do
         expect(page).to have_content 'My events'
         expect(page).to have_content 'Ignite Boulder'
         expect(page).to have_content 'Boulder Theatre'
-      end
 
       # user can see the details
       click_on 'Ignite Boulder'
