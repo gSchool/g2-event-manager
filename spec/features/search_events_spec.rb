@@ -60,4 +60,12 @@ feature 'user can search events' do
     expect(page).to_not have_content "Boulder"
 
   end
+
+  it 'displays a message when search results brings up nothing' do
+    visit ('/')
+    fill_in 'Search', with: 'Denver'
+    click_on 'Search'
+
+    expect(page).to have_content "Your search for Denver did not return any results."
+  end
 end
