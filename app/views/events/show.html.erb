@@ -16,7 +16,9 @@
   </div>
   <div class="event_info">
     <div class="title"><strong><%= @event.name %></strong></div>
-    <div class="time"><strong>When</strong>: <%= @event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+    <div class="time"><strong>When</strong>: <%= @event.date.strftime('%b %d, %Y') %></div>
+    <div class="time">Start: <%= @event.start_time %> </div>
+    <div class="time">End: <%= @event.end_time %> </div>
     <div class="description"><%= @event.description %></div>
     <div class="location"><%= @event.location %></div>
     <div class="city"><%= @event.city %></div>

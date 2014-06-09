@@ -1,41 +1,48 @@
 <div class="event_form">
   <h2>Please Add an Event</h2>
   <%= form_for @event do |f| %>
-    <% if @event.errors.present? %>
-      <div class="errors">
-        <ul class="errors">
-          <% @event.errors.full_messages.each do |error| %>
-            <li><%= error %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+      <% if @event.errors.present? %>
+          <div class="errors">
+            <ul class="errors">
+              <% @event.errors.full_messages.each do |error| %>
+                  <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
 
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
 
-    <%= f.label :date %>
-    <%= f.date_field :date, id: "event_date" %>
+      <%= f.label :date %>
+      <%= f.date_field :date, id: "event_date" %>
 
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
 
-    <%= f.label :location %>
-    <%= f.text_field :location %>
+      <%= f.label :location %>
+      <%= f.text_field :location %>
 
-    <%= f.label :city %>
-    <%= f.text_field :city %>
+      <%= f.label :city %>
+      <%= f.text_field :city %>
 
-    <%= f.label :capacity %>
-    <%= f.number_field :capacity %>
+      <%= f.label :capacity %>
+      <%= f.number_field :capacity %>
 
-    <%= f.label :category %>
-    <%= f.text_field :category %>
+      <%= f.label :start_time %>
+      <%= f.select :start_time, [["12am", "12am"], ["1am", "1am"], ["2am", "2am"], ["3am", "3am"], ["4am", "4am"], ["5am", "5am"], ["6am", "6am"], ["7am", "7am"], ["8am", "8am"], ["9am", "9am"], ["10am", "10am"], ["11am", "11am"], ["12pm", "12pm"], ["1pm", "1pm"], ["2pm", "2pm"], ["3pm", "3pm"], ["4pm", "4pm"], ["5pm", "5pm"], ["6pm", "6pm"], ["7pm", "7pm"], ["8pm", "8pm"], ["9pm", "9pm"], ["10pm", "10pm"], ["11pm", "11pm"]] %>
 
-    <%= f.label :event_pic %>
-    <%= f.file_field :event_pic %>
+      <%= f.label :end_time %>
+      <%= f.select :end_time, [["12am", "12am"], ["1am", "1am"], ["2am", "2am"], ["3am", "3am"], ["4am", "4am"], ["5am", "5am"], ["6am", "6am"], ["7am", "7am"], ["8am", "8am"], ["9am", "9am"], ["10am", "10am"], ["11am", "11am"], ["12pm", "12pm"], ["1pm", "1pm"], ["2pm", "2pm"], ["3pm", "3pm"], ["4pm", "4pm"], ["5pm", "5pm"], ["6pm", "6pm"], ["7pm", "7pm"], ["8pm", "8pm"], ["9pm", "9pm"], ["10pm", "10pm"], ["11pm", "11pm"]] %>
 
-    <%= f.submit "Create Event" %>
+
+      <%= f.label :category %>
+      <%= f.text_field :category %>
+
+      <%= f.label :event_pic %>
+      <%= f.file_field :event_pic %>
+
+      <%= f.submit "Create Event" %>
 
   <% end %>
 </div>
