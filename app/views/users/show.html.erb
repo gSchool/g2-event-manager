@@ -3,9 +3,8 @@
     <% @events.each do |event| %>
       <li class="event_synopsis">
         <div class="date">
-          <div class="day"><strong><%= event.date.strftime('%a') %></strong></div>
-          <div class="day"><%= event.date.strftime('%b %d') %></div>
-          <!--<div class="day"><%= event.location %></div>-->
+          <div class="day"><strong><%= event.date.strftime('%b %d')  %></strong></div>
+          <div class="day"><%= event.date.strftime('%a')%></div>
         </div>
         <div class="event_info">
           <div class="title"><%=link_to event.name, event_path(event.id) %> ||
@@ -55,3 +54,7 @@
     <% end %>
   </ul>
 </div>
+
+  <div id="calendar">
+    <p>Token: <%=  @calendar_token %></p>
+  </div>
