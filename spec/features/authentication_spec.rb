@@ -25,9 +25,12 @@ feature "User can register, logout & login for the site" do
 
     expect(page).to have_content "Your email address has not been confirmed"
 
+    #user confirms their email address
     email_body = ActionMailer::Base.deliveries.last.body.raw_source
     @document = Nokogiri::HTML(email_body)
     result = @document.xpath("//html//body//a//@href")[0].value
+
+    expect(result).to include('http://')
 
     visit result
 
