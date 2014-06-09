@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   def index
     if params[:search]
       @events = Event.search(params[:search]).order(:date).page(params[:page])
+      @search = params[:search]
     else
       @events = Event.all.order(:date).page(params[:page])
     end
