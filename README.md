@@ -20,6 +20,9 @@ Please follow the steps below to get this site set up for local development.
 1. `bundle`
 1. `rake db:create`
 1. `rake db:migrate`
+1. `rails server`
+
+Run the test suite with: `bundle exec rspec`
 
 Please note that this application is using carrierwave with rmagick. Please install 'imagemagick' prior to using this app through whatever
  means you use (i.e. if you use homebrew: `brew install imagemagick`).
