@@ -1,35 +1,60 @@
-<div id="my_events">
   <h1>My events</h1>
-  <ul>
+  <ul class="events">
     <% @events.each do |event| %>
-      <li><a href="/events/<%= event.id %>"><%= event.name %></a>
-        <%= event.description %>
-        <%= event.date %>
-        <%= event.location %></li>
+      <li class="event_synopsis">
+        <div class="date">
+          <div class="day"><strong><%= event.date.strftime('%b %d')  %></strong></div>
+          <div class="day"><%= event.date.strftime('%a')%></div>
+        </div>
+        <div class="event_info">
+          <div class="title"><%=link_to event.name, event_path(event.id) %> ||
+            <%= event.location %></div>
+          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+
+        </div>
+      </li>
     <% end %>
   </ul>
-</div>
 
 <div id="attending">
   <h1>Events Attending</h1>
-  <ul>
+  <ul class="events">
     <% @attending.each do |event| %>
-      <li><a href="/events/<%= event.id %>"><%= event.name %></a>
-        <%= event.description %>
-        <%= event.date %>
-        <%= event.location %></li>
+      <li class="event_synopsis">
+        <div class="date">
+          <div class="day"><strong><%= event.date.strftime('%a') %></strong></div>
+          <div class="day"><%= event.date.strftime('%b %d') %></div>
+        </div>
+        <div class="event_info">
+          <div class="title"><%=link_to event.name, event_path(event.id) %> ||
+            <%= event.location %></div>
+          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+        </div>
+      </li>
     <% end %>
+  </ul>
   </ul>
 </div>
 
 <div id="waitlisted">
   <h1>Events Waitlisted</h1>
-  <ul>
+  <ul class="events">
     <% @waitlist.each do |event| %>
-      <li><a href="/events/<%= event.id %>"><%= event.name %></a>
-        <%= event.description %>
-        <%= event.date %>
-        <%= event.location %></li>
+      <li class="event_synopsis">
+        <div class="date">
+          <div class="day"><strong><%= event.date.strftime('%a') %></strong></div>
+          <div class="day"><%= event.date.strftime('%b %d') %></div>
+        </div>
+        <div class="event_info">
+          <div class="title"><%=link_to event.name, event_path(event.id) %> ||
+            <%= event.location %></div>
+          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+        </div>
+      </li>
     <% end %>
   </ul>
 </div>
+
+  <div id="calendar">
+    <p>Token: <%=  @calendar_token %></p>
+  </div>

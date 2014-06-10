@@ -25,7 +25,7 @@
     margin-left: 1em;
     margin-top: .5em;
     float: left;
-    max-width: 20em;
+    max-width: 22em;
     div {
       padding: .3em 0;
     }
@@ -78,6 +78,13 @@
   span:last-child a, span.current:last-child {
     border-right: 1px solid black;
   }
+}
 
+a {
+  color: #49AEC0;
+}
+
+a:hover {
+  color: #377080;
 }
 

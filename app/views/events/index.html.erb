@@ -1,20 +1,27 @@
 <%= flash.now[:notice] if flash[:notice] %>
 
-<ul class="events">
+
+<% if @events.any? %>
   <% @events.each do |event| %>
-    <li class="event_synopsis">
-      <div class="date">
-        <div class="day"><strong><%= event.date.strftime('%a') %></strong></div>
-        <div class="day"><%= event.date.strftime('%b %d') %></div>
-      </div>
-      <div class="event_info">
-        <div class="title"><a href="events/<%= event.id %>"><%= event.name %></a></div>
-        <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
-      </div>
-    </li>
+    <ul class="events">
+      <li class="event_synopsis">
+        <div class="date">
+          <div class="day"><strong><%= event.date.strftime('%a') %></strong></div>
+          <div class="day"><%= event.date.strftime('%b %d') %></div>
+        </div>
+        <div class="event_info">
+          <div class="title"><a href="events/<%= event.id %>"><%= event.name %></a></div>
+          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+        </div>
+      </li>
+    </ul>
   <% end %>
-</ul>
+<% else %>
+  <div>Your search for <%= @search %> did not return any results.</div>
+   <p><%= link_to "Return to Homepage", root_path %></p>
+<% end %>
 
 
-  <%= paginate @events %>
+
+<%= paginate @events %>
 

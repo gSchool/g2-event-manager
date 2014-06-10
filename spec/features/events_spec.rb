@@ -48,6 +48,8 @@ feature 'events management' do
       fill_in 'Description', with: 'Awesomeness'
       fill_in 'Location', with: 'Boulder Theatre'
       fill_in 'Capacity', with: 500
+      select('8am', :from => 'Start time')
+      select('9am', :from => 'End time')
       fill_in 'Category', with: 'Boulder Startup Week'
       attach_file('Event pic', Rails.root.join('spec/images/image.png'))
       click_on 'Create Event'
@@ -58,16 +60,16 @@ feature 'events management' do
       expect(page).to have_content 'Awesomeness'
       expect(page).to have_content 'Boulder Startup Week'
       expect(page).to have_content '500'
+      expect(page).to have_content '8am'
+      expect(page).to have_content '9am'
       expect(page).to have_content "Edit this Event"
       expect(page).to have_css('img', visible: 'image.png')
 
       # make sure the user can see the event
       click_on 'My Events'
-      within('#my_events') do
         expect(page).to have_content 'My events'
         expect(page).to have_content 'Ignite Boulder'
         expect(page).to have_content 'Boulder Theatre'
-      end
 
       # user can see the details
       click_on 'Ignite Boulder'
@@ -76,6 +78,8 @@ feature 'events management' do
       expect(page).to have_content 'Awesomeness'
       expect(page).to have_content 'Boulder Startup Week'
       expect(page).to have_content '500'
+      expect(page).to have_content '8am'
+      expect(page).to have_content '9am'
     end
 
     scenario "user cannot submit an empty event form" do

@@ -8,6 +8,8 @@ class UsersController < ApplicationController
     if @user.save
       token = SecureRandom.uuid
       @user.update(token: token)
+      calendar_token = SecureRandom.uuid
+      @user.update(calendar_token: calendar_token)
       UserMailer.new_registration(@user).deliver
       flash[:notice] = 'A confirmation email has been sent to your email address'
       redirect_to root_path
@@ -21,6 +23,7 @@ class UsersController < ApplicationController
       @events = current_user.created_events
       @attending = current_user.attended_events
       @waitlist = current_user.waitlisted_events
+      @calendar_token = current_user.calendar_token
     else
       redirect_to root_path
     end
