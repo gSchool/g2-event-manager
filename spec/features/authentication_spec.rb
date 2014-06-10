@@ -61,31 +61,4 @@ feature "User can register, logout & login for the site" do
     expect(page).to have_content 'User/Password Combination is not correct'
   end
 
-  context "user registration validations" do
-    scenario "User cannot register with blank email field" do
-      user_register("")
-      expect(page).to have_content "Email can't be blank"
-    end
-    scenario "User cannot register with an already existing email address" do
-      User.create!(email: 'bob@bob.com', password: 'aB12341234', password_confirmation: 'aB12341234', email_confirmed: true)
-
-      visit '/'
-      click_on 'Register'
-      fill_in 'user[email]', with: "bob@bob.com"
-      fill_in 'user[password]', with: "Gschool123"
-      fill_in 'user[password_confirmation]', with: "Gschool123"
-
-      click_button 'Submit'
-
-      expect(page).to have_content "Email has already been taken"
-    end
-    scenario 'user cannot register with an invalid email address' do
-      user_register('jjkawd')
-      expect(page).to have_content "Email must be valid"
-    end
-    scenario 'user cannot register with an invalid password' do
-      user_register('paul@test.com', 'gschool1234', 'gschool1234')
-      expect(page).to have_content "Password must be valid"
-    end
-  end
 end

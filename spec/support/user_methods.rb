@@ -1,5 +1,5 @@
 module UserMethods
-  def user_register(email="joesmith@example.com", password="Gschool123", confirmation="Gschool123")
+  def create_confirmed_user(email="joesmith@example.com", password="Gschool123", confirmation="Gschool123")
     visit '/'
     click_on 'Register'
     fill_in 'user[email]', with: email

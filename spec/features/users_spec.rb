@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'Users' do
   scenario 'can log in and manage events' do
-    user_register
+    create_confirmed_user
     new_event
     expect(page).to have_content 'Ignite Boulder'
     click_on 'Edit this Event'
@@ -15,10 +15,10 @@ feature 'Users' do
   end
 
   scenario 'Registered user can see all the events they signed up for' do
-    user_register
+    create_confirmed_user
     new_event
     click_on 'Logout'
-    user_register("s@s.com")
+    create_confirmed_user("s@s.com")
 
     click_on 'Ignite Boulder'
     click_on 'RSVP for this Event'

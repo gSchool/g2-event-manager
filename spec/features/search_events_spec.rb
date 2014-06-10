@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'user can search events' do
   it 'user can enter a city in a search box and see all events in that city' do
-    user_register
+    create_confirmed_user
     click_on 'Add Event'
     fill_in 'Name', with: 'Boulder Event'
     page.find('#event_date').set(1.days.from_now)
@@ -32,7 +32,7 @@ feature 'user can search events' do
   end
 
   it 'user can enter a city with mixed case letters in a search box and see all events in that city' do
-    user_register
+    create_confirmed_user
     click_on 'Add Event'
     fill_in 'Name', with: 'Boulder Event'
     page.find('#event_date').set(1.days.from_now)
