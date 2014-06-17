@@ -56,5 +56,6 @@
 </div>
 
   <div id="calendar">
-    <p>Token: <%=  @calendar_token %></p>
+    <h2>Copy this link to add to your personal calendar:</h2>
+    <%= link_to user_calendar_url(@calendar_token), user_calendar_url(@calendar_token), format: :ics %>
   </div>
