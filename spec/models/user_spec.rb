@@ -45,10 +45,3 @@ describe User do
 
   end
 end
-
-
-#  scenario 'user cannot register with an invalid password' do
-#    user_register('paul@test.com', 'gschool1234', 'gschool1234')
-#    expect(page).to have_content "Password must be valid"
-#  end
-#end

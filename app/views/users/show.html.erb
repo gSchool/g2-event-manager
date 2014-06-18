@@ -9,7 +9,7 @@
         <div class="event_info">
           <div class="title"><%=link_to event.name, event_path(event.id) %> ||
             <%= event.location %></div>
-          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at <%= time_to_12_hour(event.start_time) %></div>
 
         </div>
       </li>
@@ -28,7 +28,7 @@
         <div class="event_info">
           <div class="title"><%=link_to event.name, event_path(event.id) %> ||
             <%= event.location %></div>
-          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at <%= time_to_12_hour(event.start_time) %></div>
         </div>
       </li>
     <% end %>
@@ -48,7 +48,7 @@
         <div class="event_info">
           <div class="title"><%=link_to event.name, event_path(event.id) %> ||
             <%= event.location %></div>
-          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at <%= time_to_12_hour(event.start_time) %></div>
         </div>
       </li>
     <% end %>
@@ -56,5 +56,6 @@
 </div>
 
   <div id="calendar">
-    <p>Token: <%=  @calendar_token %></p>
+    <h2>Copy this link to add to your personal calendar:</h2>
+    <%= link_to "#{user_calendar_url(@calendar_token)}.ics", "#{user_calendar_url(@calendar_token)}.ics", format: :ics %>
   </div>
