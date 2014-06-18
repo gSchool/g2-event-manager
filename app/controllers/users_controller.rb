@@ -29,6 +29,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def calendar
+    @user = User.find_by_calendar_token(params[:token])
+    @events = @user.attended_events
+
+    #respond_to do |format|
+    #  format.ics { render text: post.to_ics, mime_type: Mime::Type["text/calendar"]  }
+    #end
+  end
+
   private
 
   def allowed_parameters
