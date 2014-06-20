@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       @events = current_user.created_events
       @attending = current_user.attended_events
       @waitlist = current_user.waitlisted_events
-      @calendar_token = current_user.calendar_token
+      p @calendar_token = current_user.calendar_token
     else
       redirect_to root_path
     end

@@ -19,7 +19,7 @@ feature 'events management' do
 
   describe "with a logged in user" do
     before do
-      @user = User.create!(email: 'bob@bob.com', password: 'aB12341234', password_confirmation: 'aB12341234', email_confirmed: true)
+      @user = User.create!(email: 'bob@bob.com', password: 'aB12341234', password_confirmation: 'aB12341234', email_confirmed: true, token: SecureRandom.uuid, calendar_token: SecureRandom.uuid)
       log_in(@user)
     end
 
