@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       @events = current_user.created_events
       @attending = current_user.attended_events
       @waitlist = current_user.waitlisted_events
-      p @calendar_token = current_user.calendar_token
+      @calendar_token = current_user.calendar_token
     else
       redirect_to root_path
     end
@@ -31,11 +31,14 @@ class UsersController < ApplicationController
 
   def calendar
     @user = User.find_by_calendar_token(params[:token])
-    @events = @user.attended_events
 
-    #respond_to do |format|
-    #  format.ics { render text: post.to_ics, mime_type: Mime::Type["text/calendar"]  }
-    #end
+    @events = @user.associated_events
+
+    post = Event.to_ics(@events, @user)
+
+    respond_to do |format|
+      format.ics { render text: post, mime_type: Mime::Type.new("text/calendar") }
+    end
   end
 
   private

@@ -12,6 +12,8 @@ feature 'personalized event calendar' do
       description: Faker::Company.catch_phrase,
       capacity: rand(30)+10,
       category: Faker::Commerce.department,
+      start_time: "07:00",
+      end_time: "08:00"
     )
     visit '/'
     user_login(user.email, user.password)
@@ -24,8 +26,9 @@ feature 'personalized event calendar' do
 
     click_link user_calendar_token
 
-    expect(current_path).to eq("/users/calendar/#{user_calendar_token}")
+    expect(current_path).to eq("/users/calendar/#{user_calendar_token}.ics")
 
     expect(page).to have_content(event.name)
   end
+
 end
