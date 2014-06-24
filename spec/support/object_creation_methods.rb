@@ -7,7 +7,9 @@ module ObjectCreationMethods
       date: rand(25).days.from_now,
       description: Faker::Company.catch_phrase,
       capacity: rand(30)+10,
-      category: Faker::Commerce.department
+      category: Faker::Commerce.department,
+      start_time: "07:00",
+      end_time: "08:00"
     )
   end
 

@@ -2,7 +2,7 @@ require 'carrierwave/orm/activerecord'
 
 class Event < ActiveRecord::Base
 
-  validates :name, :date, :description, :location, :capacity, :category, :presence => true
+  validates :name, :date, :description, :location, :capacity, :category, :start_time, :end_time, :presence => true
 
   mount_uploader :event_pic, EventPictureUploader
 

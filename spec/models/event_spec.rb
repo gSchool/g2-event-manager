@@ -10,6 +10,8 @@ describe Event do
       description: "This is a description",
       capacity: 1,
       category: "test",
+      start_time: "07:00",
+      end_time: "08:00",
     )
     Registration.create!(event: @event, user: user, role: :guest)
   end
