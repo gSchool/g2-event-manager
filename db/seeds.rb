@@ -15,6 +15,8 @@ end
     description: Faker::Company.catch_phrase,
     capacity: rand(30)+10,
     category: Faker::Commerce.department,
-    user_id: rand(8)
+    user_id: rand(8),
+    start_time: "07:00",
+    end_time: "08:00"
   )
 end
