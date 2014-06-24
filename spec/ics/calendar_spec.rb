@@ -12,8 +12,8 @@ describe "GET /users/calendar/:calendar_token.ics", type: :request do
       description: Faker::Company.catch_phrase,
       capacity: rand(30)+10,
       category: Faker::Commerce.department,
-      start_time: "07:00",
-      end_time: "08:00"
+      start_time: "19:00",
+      end_time: "20:00"
     )
 
     Registration.create!(event: event, user: user, role: :admin)
