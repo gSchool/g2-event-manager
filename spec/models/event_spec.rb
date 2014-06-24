@@ -35,7 +35,7 @@ describe Event do
       name: "Meetup",
       location: "Pepsi Center",
       city: "Denver",
-      date: Time.at(2014-06-20),
+      date: Date.parse('2014-06-20'),
       description: "This is a description",
       capacity: 1,
       category: "test",
@@ -47,7 +47,7 @@ describe Event do
       name: "Test Meetup",
       location: "Galvanize",
       city: "Boulder",
-      date: Time.at(2014-06-20),
+      date: Date.parse('2014-06-20'),
       description: "This is a description",
       capacity: 1,
       category: "test",
@@ -67,8 +67,8 @@ PRODID:-//hacksw/handcal//NONSGML v1.0//EN
 BEGIN:VEVENT
 UID:#{event.id}
 DTSTAMP:#{timestamp}
-DTSTART:19691231T190000Z
-DTEND:19691231T200000Z
+DTSTART:20140620T190000Z
+DTEND:20140620T200000Z
 SUMMARY:#{event.name} - guest
 DESCRIPTION:This is a description
 LOCATION:Pepsi Center, Denver
@@ -76,8 +76,8 @@ END:VEVENT
 BEGIN:VEVENT
 UID:#{event2.id}
 DTSTAMP:#{timestamp}
-DTSTART:19691231T190000Z
-DTEND:19691231T200000Z
+DTSTART:20140620T190000Z
+DTEND:20140620T200000Z
 SUMMARY:#{event2.name} - guest
 DESCRIPTION:This is a description
 LOCATION:Galvanize, Boulder
