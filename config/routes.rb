@@ -15,4 +15,5 @@ Rails.application.routes.draw do
 
   get '/confirmation/:token', to: 'confirmation#new', as: :new_confirmation
   patch '/confirmation/:token', to: 'confirmation#create', as: :confirmation
+  post 'twilio/sms' => 'twilio#outbound_sms'
 end

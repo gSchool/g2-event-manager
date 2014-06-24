@@ -7,6 +7,7 @@ feature "User can register, logout & login for the site" do
     visit '/'
     click_on 'Register'
     fill_in 'user[email]', with: "joesmith@example.com"
+    fill_in 'user[phone_number]', with: "111-111-1111"
     fill_in 'user[password]', with: "Gschool123"
     fill_in 'user[password_confirmation]', with: "Gschool123"
     click_on 'Submit'
