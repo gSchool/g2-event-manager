@@ -2,7 +2,7 @@ require 'carrierwave/orm/activerecord'
 
 class Event < ActiveRecord::Base
 
-  validates :name, :date, :description, :location, :capacity, :category, :presence => true
+  validates :name, :date, :description, :location, :capacity, :category, :start_time, :end_time, :presence => true
 
   mount_uploader :event_pic, EventPictureUploader
 
@@ -28,7 +28,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.to_ics(events, user)
-    ics_string = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//hacksw/handcal//NONSGML v1.0//EN\n"
+    ics_string = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//hacksw/handcal//NONSGML v1.0//EN\nX-WR-CALNAME:G2 Events Manager Calendar\n"
     events.each do |event|
       role = registration_role(user, event)
       start_time = format_time(event.date, event.start_time)
@@ -49,15 +49,21 @@ class Event < ActiveRecord::Base
   private
 
   def self.format_time(date, time)
-    new_time = ""
-
+    converted_time = convert_to_12_hour_clock(time)
     new_date = date.strftime('%d-%m-%Y')
-    if 24 - time.slice(0..1).to_i > 12
-      new_time = new_date + " " + time + ":00 PM"
-    else
-      new_time = new_date + " " + time + ":00 AM"
-    end
+    new_time = new_date + " " + converted_time
     DateTime.strptime(new_time, '%d-%m-%Y %I:%M:%S %p')
   end
 
+  def self.convert_to_12_hour_clock(time)
+    hour = time.slice(0..1).to_i
+    if hour == 0
+      "12:00:00 AM"
+    elsif 24 - hour > 12
+      "#{hour}:00:00 AM"
+    else
+      "#{hour - 12}:00:00 PM"
+    end
+
+  end
 end

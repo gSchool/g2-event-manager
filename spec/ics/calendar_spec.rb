@@ -8,12 +8,12 @@ describe "GET /users/calendar/:calendar_token.ics", type: :request do
       name: "#{Faker::Lorem.word.capitalize} Meetup",
       location: "Place",
       city: Faker::Address.city,
-      date: Time.at(2014-06-20),
+      date: Date.parse('2014-06-20'),
       description: Faker::Company.catch_phrase,
       capacity: rand(30)+10,
       category: Faker::Commerce.department,
-      start_time: "07:00",
-      end_time: "08:00"
+      start_time: "19:00",
+      end_time: "20:00"
     )
 
     Registration.create!(event: event, user: user, role: :admin)
@@ -26,11 +26,12 @@ describe "GET /users/calendar/:calendar_token.ics", type: :request do
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+X-WR-CALNAME:G2 Events Manager Calendar
 BEGIN:VEVENT
 UID:#{event.id}
 DTSTAMP:#{timestamp}
-DTSTART:19691231T190000Z
-DTEND:19691231T200000Z
+DTSTART:20140620T190000Z
+DTEND:20140620T200000Z
 SUMMARY:#{event.name} - admin
 DESCRIPTION:#{event.description}
 LOCATION:#{event.location}, #{event.city}

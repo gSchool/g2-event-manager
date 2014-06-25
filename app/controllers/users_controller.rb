@@ -36,9 +36,7 @@ class UsersController < ApplicationController
 
     post = Event.to_ics(@events, @user)
 
-    respond_to do |format|
-      format.ics { render text: post, mime_type: Mime::Type.new("text/calendar") }
-    end
+    render text: post, mime_type: Mime::Type.new("text/calendar")
   end
 
   private

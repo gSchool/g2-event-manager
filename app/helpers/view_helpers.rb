@@ -9,7 +9,9 @@ module ViewHelpers
     end
 
     new_time = 24 - another_time.to_i
-    if new_time > 12
+    if new_time == 24
+      "12am"
+    elsif new_time > 12
       another_time + "am"
     else
       (another_time.to_i - 12).to_s + "pm"
