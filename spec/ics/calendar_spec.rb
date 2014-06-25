@@ -26,6 +26,7 @@ describe "GET /users/calendar/:calendar_token.ics", type: :request do
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+X-WR-CALNAME:G2 Events Manager Calendar
 BEGIN:VEVENT
 UID:#{event.id}
 DTSTAMP:#{timestamp}

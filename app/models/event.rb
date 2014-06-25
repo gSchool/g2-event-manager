@@ -28,7 +28,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.to_ics(events, user)
-    ics_string = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//hacksw/handcal//NONSGML v1.0//EN\n"
+    ics_string = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//hacksw/handcal//NONSGML v1.0//EN\nX-WR-CALNAME:G2 Events Manager Calendar\n"
     events.each do |event|
       role = registration_role(user, event)
       start_time = format_time(event.date, event.start_time)
