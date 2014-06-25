@@ -16,15 +16,4 @@ describe Registration do
     expect(user.owned_events.length).to eq(1)
     expect(user.owned_events).to include(event_i_own)
   end
-
-  it 'user can register then unregister for an event ' do
-    user = create_user
-    event = create_event
-    register_user_for_event(user, event)
-    expected = user.registrations
-    expect(user.id).to eq expected.first.user_id
-    expect(event.id).to eq expected.first.event_id
-    unregister_user_for_event(user, event)
-    expect(user.registrations).to be_empty
-  end
 end
