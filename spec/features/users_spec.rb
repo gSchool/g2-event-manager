@@ -30,7 +30,7 @@ feature 'Users' do
     end
   end
 
-  scenario 'user can reset their password' do
+  scenario 'user can reset their password', job: true do
     user = User.create!(email: 'user@example.com', password: 'Password1', email_confirmed: true)
     mail_sent = ActionMailer::Base.deliveries.length
 
@@ -74,7 +74,7 @@ feature 'Users' do
     expect(page).to have_link 'Logout'
   end
 
-  scenario 'user cannot reset their password after the token expires' do
+  scenario 'user cannot reset their password after the token expires', job: true do
     user = User.create!(email: 'user@example.com', password: 'Password1')
     mail_sent = ActionMailer::Base.deliveries.length
 

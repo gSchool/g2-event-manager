@@ -17,6 +17,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'rmagick', '~> 2.13.2',require: false
 gem 'fog', '~> 1.22.1'
 gem 'twilio-ruby', '~> 3.11.5'
+gem 'sucker_punch', '~> 1.1'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       @user.update(token: token)
       calendar_token = SecureRandom.uuid
       @user.update(calendar_token: calendar_token)
-      UserMailer.new_registration(@user).deliver
+      WelcomeEmailJob.new.async.send_welcome_email(@user)
       flash[:notice] = 'A confirmation email has been sent to your email address'
       redirect_to root_path
     else

@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140609220947) do
     t.datetime "password_reset_sent_at"
     t.boolean  "email_confirmed",        default: false
     t.string   "calendar_token"
+    t.string   "phone_number"
   end
 
 end

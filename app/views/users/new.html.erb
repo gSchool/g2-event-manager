@@ -10,6 +10,7 @@
   <%= form_for @user do |f| %>
     <%= f.label :email %>
     <%= f.email_field :email %>
+    <%= f.telephone_field :phone_number %>
     <%= f.label :password %>
     <%= f.password_field :password, placeholder: "8 chars 1 lowercase, 1 uppercase, 1 digit" %>
     <%= f.label :password_confirmation %>

@@ -7,7 +7,7 @@ class ResetPasswordsController < ApplicationController
     if @user
       token = SecureRandom.uuid
       @user.update(token: token, password_reset_sent_at: Time.now)
-      UserMailer.forgot_password(@user).deliver
+      PasswordResetEmailJob.new.async.send_password_reset_email(@user)
     end
 
     redirect_to new_login_path, notice: 'An email has been sent with instructions on how to reset your password'
