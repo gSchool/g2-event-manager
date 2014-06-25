@@ -1,0 +1,10 @@
+<li class="event_synopsis">
+  <div class="date">
+    <div class="day"><strong><%= event.date.strftime('%a') %></strong></div>
+    <div class="day"><%= event.date.strftime('%b %d') %></div>
+  </div>
+  <div class="event_info">
+    <div class="title"><a href="events/<%= event.id %>"><%= event.name %></a></div>
+    <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at <%= event.start_time %></div>
+  </div>
+</li>

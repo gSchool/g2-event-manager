@@ -20,4 +20,8 @@ RSpec.configure do |config|
   config.include ObjectCreationMethods
   config.include UserMethods
   config.include EventMethods
+
+  config.before(:each) do
+    ActionMailer::Base.deliveries.clear
+  end
 end
