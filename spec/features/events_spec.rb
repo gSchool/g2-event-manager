@@ -80,7 +80,6 @@ feature 'events management' do
       visit '/'
       click_on 'Add Event'
       fill_in 'Name', with: 'Ignite Boulder'
-      # this sets the date for the event
       page.find('#event_date').set(1.days.from_now)
       fill_in 'Description', with: 'Awesomeness'
       fill_in 'Location', with: 'Boulder Theatre'
