@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users
+  get '/users/calendar/:token', to: 'users#calendar', as: :user_calendar
+
   resources :events do
     resources :registrations, only: [:create, :destroy]
   end

@@ -11,7 +11,7 @@
         </div>
         <div class="event_info">
           <div class="title"><a href="events/<%= event.id %>"><%= event.name %></a></div>
-          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at 7:00AM</div>
+          <div class="time"><strong>When</strong>: <%= event.date.strftime('%b %d, %Y') %> at <%= event.start_time %></div>
         </div>
       </li>
     </ul>

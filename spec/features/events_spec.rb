@@ -19,7 +19,7 @@ feature 'events management' do
 
   describe "with a logged in user" do
     before do
-      @user = User.create!(email: 'bob@bob.com', password: 'aB12341234', password_confirmation: 'aB12341234', email_confirmed: true)
+      @user = User.create!(email: 'bob@bob.com', password: 'aB12341234', password_confirmation: 'aB12341234', email_confirmed: true, token: SecureRandom.uuid, calendar_token: SecureRandom.uuid)
       log_in(@user)
     end
 
@@ -27,7 +27,6 @@ feature 'events management' do
       visit '/'
       click_on 'Add Event'
       fill_in 'Name', with: 'Ignite Boulder'
-      # this sets the date for the event
       page.find('#event_date').set(1.days.from_now)
       fill_in 'Description', with: 'Awesomeness'
       fill_in 'Location', with: 'Boulder Theatre'
@@ -43,7 +42,6 @@ feature 'events management' do
       visit '/'
       click_on 'Add Event'
       fill_in 'Name', with: 'Ignite Boulder'
-      # this sets the date for the event
       page.find('#event_date').set(1.days.from_now)
       fill_in 'Description', with: 'Awesomeness'
       fill_in 'Location', with: 'Boulder Theatre'
@@ -54,7 +52,6 @@ feature 'events management' do
       attach_file('Event pic', Rails.root.join('spec/images/image.png'))
       click_on 'Create Event'
 
-      # more expectations
       expect(page).to have_content 'Ignite Boulder'
       expect(page).to have_content 'Boulder Theatre'
       expect(page).to have_content 'Awesomeness'
@@ -62,16 +59,14 @@ feature 'events management' do
       expect(page).to have_content '500'
       expect(page).to have_content '8am'
       expect(page).to have_content '9am'
-      expect(page).to have_content "Edit this Event"
+      expect(page).to have_content 'Edit this Event'
       expect(page).to have_css('img', visible: 'image.png')
 
-      # make sure the user can see the event
       click_on 'My Events'
-        expect(page).to have_content 'My events'
-        expect(page).to have_content 'Ignite Boulder'
-        expect(page).to have_content 'Boulder Theatre'
+      expect(page).to have_content 'My events'
+      expect(page).to have_content 'Ignite Boulder'
+      expect(page).to have_content 'Boulder Theatre'
 
-      # user can see the details
       click_on 'Ignite Boulder'
       expect(page).to have_content 'Ignite Boulder'
       expect(page).to have_content 'Boulder Theatre'
@@ -91,14 +86,47 @@ feature 'events management' do
       expect(page).to have_content "Description can't be blank"
     end
 
+    scenario 'a user can edit an event' do
+      visit '/'
+      click_on 'Add Event'
+      fill_in 'Name', with: 'Ignite Boulder'
+      page.find('#event_date').set(1.days.from_now)
+      fill_in 'Description', with: 'Awesomeness'
+      fill_in 'Location', with: 'Boulder Theatre'
+      fill_in 'Capacity', with: 500
+      select('8am', :from => 'Start time')
+      select('9am', :from => 'End time')
+      fill_in 'Category', with: 'Boulder Startup Week'
+      attach_file('Event pic', Rails.root.join('spec/images/image.png'))
+      click_on 'Create Event'
+
+      click_on 'Edit this Event'
+
+      fill_in 'Name', with: 'Ignite Boulder'
+      page.find('#event_date').set(1.days.from_now)
+      fill_in 'Description', with: 'Awesomeness'
+      fill_in 'Location', with: 'Boulder Theatre'
+      fill_in 'Capacity', with: 300
+      select('9am', :from => 'Start time')
+      select('10am', :from => 'End time')
+      fill_in 'Category', with: 'Boulder Startup Week'
+      attach_file('Event pic', Rails.root.join('spec/images/image.png'))
+      click_on 'Update Event'
+
+      expect(page).to have_content '10am'
+      expect(page).to have_content '300'
+    end
+
     scenario 'a user can register for an event' do
       Event.create!(
-          name: "Ignite Boulder",
-          location: "Boulder, CO",
-          date: 1.days.from_now,
-          description: "This is a description",
-          capacity: 500,
-          category: "test"
+        name: "Ignite Boulder",
+        location: "Boulder, CO",
+        date: 1.days.from_now,
+        description: "This is a description",
+        capacity: 500,
+        category: "test",
+        start_time: "01:00",
+        end_time: "02:00"
       )
 
       visit root_path
@@ -114,12 +142,14 @@ feature 'events management' do
 
     scenario 'a user can be waitlisted for a full event and un-waitlist' do
       event = Event.create!(
-          name: "Ignite Boulder",
-          location: "Boulder, CO",
-          date: 1.days.from_now,
-          description: "This is a description",
-          capacity: 1,
-          category: "test"
+        name: "Ignite Boulder",
+        location: "Boulder, CO",
+        date: 1.days.from_now,
+        description: "This is a description",
+        capacity: 1,
+        category: "test",
+        start_time: "01:00",
+        end_time: "02:00"
       )
       another_user = User.create!(email: 'sue@sue.com', password: 'aB12341234', password_confirmation: 'aB12341234')
       Registration.create!(event: event, user: another_user, role: :guest)
@@ -134,12 +164,14 @@ feature 'events management' do
 
     scenario 'only a user can view open spaces for an event' do
       Event.create!(
-          name: "Ignite Boulder",
-          location: "Boulder, CO",
-          date: 1.days.from_now,
-          description: "This is a description",
-          capacity: 500,
-          category: "test"
+        name: "Ignite Boulder",
+        location: "Boulder, CO",
+        date: 1.days.from_now,
+        description: "This is a description",
+        capacity: 500,
+        category: "test",
+        start_time: "01:00",
+        end_time: "02:00"
       )
 
       visit '/events'

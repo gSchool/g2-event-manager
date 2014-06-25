@@ -16,3 +16,6 @@ deploy:
     repo: gSchool/g2-event-manager
   run:
     - "bundle exec rake db:migrate"
+branches:
+  only:
+    - master
