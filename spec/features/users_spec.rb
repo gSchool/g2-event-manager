@@ -49,9 +49,7 @@ feature 'Users' do
 
     time_sent = user.password_reset_sent_at
 
-    email_body = ActionMailer::Base.deliveries.last.body.raw_source
-    @document = Nokogiri::HTML(email_body)
-    result = @document.xpath("//html//body//a//@href")[0].value
+    result = first_link_in(ActionMailer::Base.deliveries.last.body.raw_source)
 
     new_time = time_sent + 14.minutes
     Timecop.travel(new_time)
@@ -95,9 +93,7 @@ feature 'Users' do
 
     time_sent = user.password_reset_sent_at
 
-    email_body = ActionMailer::Base.deliveries.last.body.raw_source
-    @document = Nokogiri::HTML(email_body)
-    result = @document.xpath("//html//body//a//@href")[0].value
+    result = first_link_in(ActionMailer::Base.deliveries.last.body.raw_source)
 
     new_time = time_sent + 16.minutes
     Timecop.travel(new_time)
