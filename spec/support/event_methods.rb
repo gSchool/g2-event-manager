@@ -11,13 +11,4 @@ module EventMethods
     click_on 'Create Event'
 
   end
-
-  def register_user_for_event(user, event)
-    Registration.create(event_id: event.id, user_id: user.id, role: 2)
-  end
-
-  def unregister_user_for_event(user, event)
-    event.capacity += 1
-    Registration.find_by(event_id: event.id, user_id: user.id, role: 2).destroy
-  end
 end
