@@ -9,6 +9,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   has_many :registrations
   has_many :users, through: :registrations
+  has_one :event_reminder
 
   def self.search(query)
     where("city iLIKE ?", "%#{query}%")

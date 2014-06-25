@@ -17,6 +17,8 @@ module ObjectCreationMethods
     User.create(email: "bob@bob.com", password: "gSchool123")
   end
 
-
+  def create_event_reminder(event_id)
+    EventReminder.create!(event_id: event_id)
+  end
 
 end

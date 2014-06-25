@@ -35,7 +35,6 @@ feature 'events management' do
       click_on 'Create Event'
       visit ('/')
       expect(page).to have_content 'Ignite Boulder'
-
     end
 
     scenario "user can create and see the event they created" do
@@ -75,6 +74,21 @@ feature 'events management' do
       expect(page).to have_content '500'
       expect(page).to have_content '8am'
       expect(page).to have_content '9am'
+    end
+
+    scenario "an event reminder is created when an event is created" do
+      visit '/'
+      click_on 'Add Event'
+      fill_in 'Name', with: 'Ignite Boulder'
+      # this sets the date for the event
+      page.find('#event_date').set(1.days.from_now)
+      fill_in 'Description', with: 'Awesomeness'
+      fill_in 'Location', with: 'Boulder Theatre'
+      fill_in 'Capacity', with: 500
+      fill_in 'Category', with: 'Boulder Startup Week'
+      click_on 'Create Event'
+
+      expect(EventReminder.last.event_id).to eq(Event.last.id)
     end
 
     scenario "user cannot submit an empty event form" do

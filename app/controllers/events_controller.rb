@@ -23,6 +23,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params.merge(:user => current_user))
     if @event.save
       @event.registrations << Registration.new(user: current_user, role: :creator)
+      EventReminder.create(event_id: @event.id)
       redirect_to event_path(@event)
     else
       render new_event_path
