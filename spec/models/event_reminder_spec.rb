@@ -16,11 +16,16 @@ describe EventReminder do
       description: Faker::Company.catch_phrase,
       capacity: rand(30)+10,
       category: Faker::Commerce.department,
-      start_time: 24.hours.from_now
+      start_time: 24.hours.from_now,
+      end_time: 25.hours.from_now
     )
     create_event_reminder(event.id)
-    expected = (event.start_time.to_time - (60 * 30))
 
-    expect(EventReminder.last.reminder_time).to eq(expected)
+    actual = EventReminder.last.reminder_time
+    actual = "#{actual.year}#{actual.month}#{actual.day}#{actual.hour}#{actual.min}#{actual.sec}"
+    expected = event.start_time.to_time - (60 * 30)
+    expected = "#{expected.year}#{expected.month}#{expected.day}#{expected.hour}#{expected.min}#{expected.sec}"
+
+    expect(actual).to eq(expected)
   end
 end
