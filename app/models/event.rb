@@ -2,6 +2,8 @@ require 'carrierwave/orm/activerecord'
 
 class Event < ActiveRecord::Base
 
+  before_create :event_time_conversion
+
   validates :name, :date, :description, :location, :capacity, :category, :start_time, :end_time, :presence => true
 
   mount_uploader :event_pic, EventPictureUploader
@@ -47,18 +49,6 @@ class Event < ActiveRecord::Base
     ics_string << "END:VCALENDAR"
   end
 
-  def start_time_conversion
-    event_date =  self.date
-    event_start = self.start_time.to_time
-    self.start_time = Time.new(event_date.year, event_date.month, event_date.day, event_start.hour, event_start.min)
-  end
-
-  def end_time_conversion
-    event_date = self.date
-    event_end = self.end_time.to_time
-    self.end_time = Time.new(event_date.year, event_date.month, event_date.day, event_end.hour, event_end.min)
-  end
-
   private
 
   def self.format_time(date, time)
@@ -78,5 +68,14 @@ class Event < ActiveRecord::Base
       "#{hour - 12}:00:00 PM"
     end
 
+  end
+
+  def event_time_conversion
+    event_date = self.date
+    event_start = self.start_time.to_time
+    event_end = self.end_time.to_time
+
+    self.start_time = Time.new(event_date.year, event_date.month, event_date.day, event_start.hour, event_start.min)
+    self.end_time = Time.new(event_date.year, event_date.month, event_date.day, event_end.hour, event_end.min)
   end
 end
